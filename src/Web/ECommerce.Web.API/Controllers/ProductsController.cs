@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using ECommerce.Core.Application.Commands.ProductCommands;
-using ECommerce.Core.DataAccess.Auth;
+﻿using ECommerce.Core.Application.Commands.ProductCommands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;

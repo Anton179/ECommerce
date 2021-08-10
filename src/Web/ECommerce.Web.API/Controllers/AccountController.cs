@@ -25,7 +25,6 @@ namespace ECommerce.Web.API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
-        //private readonly IUserInfoRepository _repository;
         private readonly RoleManager<Role> _roleManager;
         private readonly IMediator _mediator;
 
@@ -37,7 +36,6 @@ namespace ECommerce.Web.API.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
-            //_repository = repository;
             _roleManager = roleManager;
             _mediator = mediator;
         }
@@ -114,7 +112,6 @@ namespace ECommerce.Web.API.Controllers
                 issuer: _authOptions.Issuer,
                 audience: _authOptions.Audience,
                 claims: _claims,
-                //expires: DateTime.Now.AddDays(30),
                 expires: DateTime.Now.AddSeconds(_authOptions.TokenLifetime),
                 signingCredentials: signingCredentials
             );
@@ -141,33 +138,5 @@ namespace ECommerce.Web.API.Controllers
 
             return IR;
         }
-
-        //private async Task<ActionResult<UserInfo>> CreateUserInfo(UserForUpdateDto userForUpdateDto, int userId)
-        //{
-        //    var userInfo = _mapper.Map<UserInfo>(userForUpdateDto);
-        //    userInfo.OwnerId = userId;
-
-        //    await _repository.Add(userInfo);
-        //    await _repository.SaveChangesAsync();
-
-        //    return Ok(userInfo);
-        //}
-
-        //private string GetJwtSecurityToken(int userId)
-        //{
-        //    List<Claim> _claims = new List<Claim>() { new Claim("UserId", userId.ToString()) };
-
-        //    var signingCredentials = new SigningCredentials(_authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256);
-        //    var jwtSecurityToken = new JwtSecurityToken(
-        //        issuer: _authOptions.Issuer,
-        //        audience: _authOptions.Audience,
-        //        claims: _claims,
-        //        expires: DateTime.Now.AddDays(30),
-        //        signingCredentials: signingCredentials
-        //    );
-
-        //    var tokenHandler = new JwtSecurityTokenHandler();
-        //    return tokenHandler.WriteToken(jwtSecurityToken);
-        //}
     }
 }

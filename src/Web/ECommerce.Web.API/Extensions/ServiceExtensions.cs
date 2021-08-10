@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ECommerce.Core.Application.Interfaces;
+﻿using ECommerce.Core.Application.Interfaces;
 using ECommerce.Infrastructure.API.Configuration;
 using ECommerce.Infrastructure.API.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,8 +12,6 @@ namespace ECommerce.Web.API.Extensions
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            //services.AddScoped<IUserInfoRepository, UserInfoRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             return services;
