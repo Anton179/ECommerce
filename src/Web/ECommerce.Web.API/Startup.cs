@@ -49,6 +49,22 @@ namespace ECommerce.Web.API
                 .AddEntityFrameworkStores<ECommerceDbContext>()
                 .AddDefaultTokenProviders();
 
+            var migrationsAssembly = typeof(ECommerceDbContext).GetTypeInfo().Assembly.GetName().Name;
+
+            services.AddIdentityServer()
+                .AddAspNetIdentity<User>()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseSqlServer("ECommerceConnection",
+                        opt => opt.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseSqlServer("ECommerceConnection",
+                        opt => opt.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddDeveloperSigningCredential();
+
             var authOptions = services.ConfigureAuthOptions(Configuration);
             services.AddJwtAuthentication(authOptions);
 
@@ -100,7 +116,8 @@ namespace ECommerce.Web.API
 
             app.UseCors();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
+            app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
