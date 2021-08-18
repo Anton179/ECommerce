@@ -1,5 +1,4 @@
-﻿using ECommerce.Core.Application.Interfaces;
-using ECommerce.Core.DataAccess;
+﻿using ECommerce.Core.DataAccess;
 using ECommerce.Core.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Interfaces;
 
 namespace ECommerce.Infrastructure.API.Repository
 {

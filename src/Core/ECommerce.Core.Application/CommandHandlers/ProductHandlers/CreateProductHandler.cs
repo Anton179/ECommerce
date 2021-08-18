@@ -18,7 +18,7 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
         private readonly ICurrentUserProvider _currentUserProvider;
 
         public CreateProductHandler(IGenericRepository<Product> repository, IMapper mapper,
-            UserManager<User> userManager, IMediator mediator,
+            IMediator mediator,
             ICurrentUserProvider currentUserProvider) : base(mediator)
         {
             _productRepository = repository;
@@ -32,7 +32,7 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
 
             product.OwnerId = _currentUserProvider.GetUserId();
 
-            await _productRepository.AddAsync(product);
+            await _productRepository.AddAsync(product, cancellationToken);
             await _productRepository.SaveChangesAsync();
 
             return product.Id;

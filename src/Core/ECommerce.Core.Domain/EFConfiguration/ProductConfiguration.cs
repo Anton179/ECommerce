@@ -1,6 +1,8 @@
-﻿using ECommerce.Core.DataAccess.Entities;
+﻿using System.Collections.Generic;
+using ECommerce.Core.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 
 namespace ECommerce.Core.DataAccess.EFConfiguration
 {
@@ -25,6 +27,11 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
             builder.HasOne(p => p.User)
                 .WithMany(u => u.Products)
                 .HasForeignKey(p => p.OwnerId);
+
+            builder.Property(p => p.Characteristics)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
         }
     }
 }

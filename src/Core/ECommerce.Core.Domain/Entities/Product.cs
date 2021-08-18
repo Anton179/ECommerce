@@ -1,4 +1,5 @@
-﻿using ECommerce.Core.DataAccess.Auth;
+﻿using System.Collections.Generic;
+using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Core.DataAccess.Enums;
 
 namespace ECommerce.Core.DataAccess.Entities
@@ -11,7 +12,7 @@ namespace ECommerce.Core.DataAccess.Entities
         public double Price { get; set; }
         public double Weight { get; set; }
         public string ImageUrl { get; set; }
-        public string Characteristics { get; set; }
+        public Dictionary<string, string> Characteristics { get; set; } = new Dictionary<string, string>();
         public virtual User User { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace ECommerce.Core.DataAccess
 {
     public class ECommerceDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
-        public ECommerceDbContext(DbContextOptions options) : base(options)
+        public ECommerceDbContext(DbContextOptions<ECommerceDbContext> options) : base(options)
         {
         }
 
