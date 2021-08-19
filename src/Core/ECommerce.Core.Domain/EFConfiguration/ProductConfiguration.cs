@@ -28,10 +28,10 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .WithMany(u => u.Products)
                 .HasForeignKey(p => p.OwnerId);
 
-            builder.Property(p => p.Characteristics)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
+            //builder.Property(p => p.Characteristics)
+            //    .HasConversion(
+            //        v => JsonConvert.SerializeObject(v),
+            //        v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Auth;
-using IdentityServer4.EntityFramework.DbContexts;
-using Microsoft.AspNetCore.Identity;
+using ECommerce.Core.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ECommerce.Core.DataAccess;
 
-namespace ECommerce.Web.IdentitySever.Extensions
+namespace ECommerce.Web.API.Extensions
 {
     public static class HostExtensions
     {
@@ -19,15 +18,8 @@ namespace ECommerce.Web.IdentitySever.Extensions
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var configurationContext = services.GetRequiredService<ConfigurationDbContext>();
                     var ecommerceDbContext = services.GetRequiredService<ECommerceDbContext>();
-                    var userManager = services.GetRequiredService<UserManager<User>>();
-                    var roleManager = services.GetRequiredService<RoleManager<Role>>();
 
-
-                    await Seed.SeedIdentityRoles(roleManager);
-                    await Seed.SeedIdentityUsers(userManager);
-                    await Seed.SeedIdentityServer(configurationContext);
                     await Seed.SeedApiServer(ecommerceDbContext);
                 }
                 catch (Exception exception)

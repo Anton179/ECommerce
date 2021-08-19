@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ECommerce.Core.Application.Interfaces
+namespace ECommerce.Core.DataAccess.Interfaces
 {
     public interface ICurrentUserProvider
     {

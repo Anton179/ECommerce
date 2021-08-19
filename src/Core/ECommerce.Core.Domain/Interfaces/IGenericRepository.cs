@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ECommerce.Core.Application.Interfaces
+namespace ECommerce.Core.DataAccess.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     {

@@ -1,4 +1,6 @@
 ﻿using ECommerce.Core.DataAccess.Auth;
+using ECommerce.Core.DataAccess.Entities;
+using ECommerce.Core.DataAccess.Enums;
 using IdentityModel;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Entities;
@@ -9,8 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Enums;
 using ApiResource = IdentityServer4.EntityFramework.Entities.ApiResource;
 using ApiScope = IdentityServer4.EntityFramework.Entities.ApiScope;
 using Client = IdentityServer4.EntityFramework.Entities.Client;
@@ -36,11 +36,10 @@ namespace ECommerce.Core.DataAccess
                 {
                     var user = new User
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("7D55490E-E76D-4713-BBF3-B3EC8912A8D7"),
                         UserName = "Anton179",
                         Email = "anichitenco@gmail.com",
                         EmailConfirmed = true,
-                        IsActive = true
                     };
 
                     var result = await userManager.CreateAsync(user, "12345test");
@@ -59,7 +58,6 @@ namespace ECommerce.Core.DataAccess
                         UserName = "Alex123",
                         Email = "alex123@gmail.com",
                         EmailConfirmed = true,
-                        IsActive = true
                     };
 
                     var result = await userManager.CreateAsync(user, "12345test");
@@ -74,11 +72,10 @@ namespace ECommerce.Core.DataAccess
                 {
                     var user = new User
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("DE0821F1-6819-49E8-A823-B4B1A19BAEAD"),
                         UserName = "Jenea228",
                         Email = "jenea228@gmail.com",
                         EmailConfirmed = true,
-                        IsActive = true
                     };
 
                     var result = await userManager.CreateAsync(user, "12345test");
@@ -94,8 +91,7 @@ namespace ECommerce.Core.DataAccess
             }
         }
 
-        public static async Task SeedIdentityServer(ConfigurationDbContext configurationDbContext,
-            ECommerceDbContext eCommerceDbContext)
+        public static async Task SeedIdentityServer(ConfigurationDbContext configurationDbContext)
         {
             if (!configurationDbContext.Clients.Any())
             {
@@ -112,14 +108,8 @@ namespace ECommerce.Core.DataAccess
                 await SeedApiResources(configurationDbContext);
             }
 
-            if (!eCommerceDbContext.Products.Any())
-            {
-                await SeedProducts(eCommerceDbContext);
-            }
-
 
             await configurationDbContext.SaveChangesAsync();
-            await eCommerceDbContext.SaveChangesAsync();
         }
 
         private static async Task SeedScopes(ConfigurationDbContext configurationDbContext)
@@ -283,7 +273,7 @@ namespace ECommerce.Core.DataAccess
 
             client.PostLogoutRedirectUris = new()
             {
-                new ClientPostLogoutRedirectUri { PostLogoutRedirectUri = "http://localhost:4200/signout-callback", Client = client}
+                new ClientPostLogoutRedirectUri { PostLogoutRedirectUri = "http://localhost:4200/signout-callback", Client = client }
             };
 
 
@@ -383,6 +373,16 @@ namespace ECommerce.Core.DataAccess
             await configurationDbContext.IdentityResources.AddRangeAsync(resources);
         }
 
+        public static async Task SeedApiServer(ECommerceDbContext eCommerceDbContext)
+        {
+            if (!eCommerceDbContext.Products.Any())
+            {
+                await SeedProducts(eCommerceDbContext);
+            }
+
+            await eCommerceDbContext.SaveChangesAsync();
+        }
+
         private static async Task SeedProducts(ECommerceDbContext eCommerceDbContext)
         {
             var products = new List<Product>()
@@ -398,11 +398,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -415,11 +415,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -432,11 +432,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -449,11 +449,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -466,11 +466,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -483,11 +483,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -500,11 +500,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -517,11 +517,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
                 new Product()
                 {
@@ -534,11 +534,11 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    Characteristics = new Dictionary<string, string>()
-                    {
-                        ["Type ch1"] = "value1",
-                        ["Type ch12"] = "value2"
-                    }
+                    //Characteristics = new Dictionary<string, string>()
+                    //{
+                    //    ["Type ch1"] = "value1",
+                    //    ["Type ch12"] = "value2"
+                    //}
                 },
             };
 

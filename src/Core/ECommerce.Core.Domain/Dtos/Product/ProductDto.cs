@@ -17,6 +17,6 @@ namespace ECommerce.Core.DataAccess.Dtos.Product
         public double Price { get; set; }
         public double Weight { get; set; }
         public string ImageUrl { get; set; }
-        public Dictionary<string, string> Characteristics { get; set; } = new Dictionary<string, string>();
+        //public Dictionary<string, string> Characteristics { get; set; } = new Dictionary<string, string>();
     }
 }

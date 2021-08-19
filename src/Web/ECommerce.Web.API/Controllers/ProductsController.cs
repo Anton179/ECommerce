@@ -1,16 +1,12 @@
 ﻿using ECommerce.Core.Application.Commands.ProductCommands;
+using ECommerce.Core.Application.Queries.Products;
+using ECommerce.Core.DataAccess.Dtos.Product;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.Application.Queries.Products;
-using ECommerce.Core.DataAccess.Dtos.Product;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 
 namespace ECommerce.Web.API.Controllers
 {

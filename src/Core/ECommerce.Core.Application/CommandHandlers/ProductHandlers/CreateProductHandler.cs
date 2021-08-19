@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerce.Core.Application.Commands.ProductCommands;
-using ECommerce.Core.Application.Interfaces;
+using ECommerce.Core.DataAccess.Interfaces;
 using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Core.DataAccess.Entities;
 using MediatR;

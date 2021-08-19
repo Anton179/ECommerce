@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.Application.Interfaces;
+using ECommerce.Core.DataAccess.Interfaces;
 
-namespace ECommerce.Infrastructure.API.Repository
+namespace ECommerce.Core.DataAccess.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {

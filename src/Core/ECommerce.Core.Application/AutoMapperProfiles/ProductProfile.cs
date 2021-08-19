@@ -11,7 +11,6 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
         public ProductProfile()
         {
             CreateMap<Product, ProductDto>();
-            //CreateMap<Product, ProductForCreateDto>();
             CreateMap<CreateProductCommand, ProductDto>();
             CreateMap<CreateProductCommand, Product>();
             CreateMap<Product, CreateProductCommand>();

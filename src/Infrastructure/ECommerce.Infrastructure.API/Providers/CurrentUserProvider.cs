@@ -1,4 +1,4 @@
-﻿using ECommerce.Core.Application.Interfaces;
+﻿using ECommerce.Core.DataAccess.Interfaces;
 using System;
 using System.Linq;
 using IdentityServer4.Extensions;
