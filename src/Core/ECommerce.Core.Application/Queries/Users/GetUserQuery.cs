@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Dtos.User;
+using ECommerce.Core.DataAccess.Dtos.UserDtos;
 using MediatR;
 
 namespace ECommerce.Core.Application.Queries.Users

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerce.Core.Application.Commands.ProductCommands;
-using ECommerce.Core.DataAccess.Dtos.Product;
+using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using ECommerce.Core.DataAccess.Entities;
 //using ECommerce.Core.Domain.ViewModels;
 

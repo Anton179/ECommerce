@@ -1,4 +1,4 @@
-﻿using ECommerce.Core.DataAccess.Dtos.Product;
+﻿using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using MediatR;
 using System.Collections.Generic;
 

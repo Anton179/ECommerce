@@ -1,5 +1,5 @@
 ﻿using System;
-using ECommerce.Core.DataAccess.Dtos.Product;
+using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using MediatR;
 
 namespace ECommerce.Core.Application.Queries.Products

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ECommerce.Core.DataAccess.Entities.Characteristics;
 using ApiResource = IdentityServer4.EntityFramework.Entities.ApiResource;
 using ApiScope = IdentityServer4.EntityFramework.Entities.ApiScope;
 using Client = IdentityServer4.EntityFramework.Entities.Client;
@@ -203,60 +204,6 @@ namespace ECommerce.Core.DataAccess
                 }
             };
 
-            var passClient = new Client
-            {
-                ClientId = "6A491EB6-99A7-4277-9884-72904DF2BA9B",
-                ClientName = "Search password",
-                AllowedGrantTypes = new List<ClientGrantType>
-                {
-                    new ClientGrantType
-                    {
-                        GrantType = GrantType.ResourceOwnerPassword
-                    }
-                },
-                ClientSecrets = new List<ClientSecret>
-                {
-                    new ClientSecret
-                    {
-                        Value = "6FF4EC10-TCDProject-ACDD-Angular-4BFD-Client-8532-351C6D056462".ToSha256()
-                    }
-                },
-                RequireClientSecret = true,
-                AlwaysIncludeUserClaimsInIdToken = true,
-                AllowedScopes = new List<ClientScope>
-                {
-                    new ClientScope
-                    {
-                        Scope = "full"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "read"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "write"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "openid"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "offline_access"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "profile"
-                    }
-                }
-            };
-
             client.RedirectUris = new()
             {
                 new ClientRedirectUri
@@ -279,7 +226,6 @@ namespace ECommerce.Core.DataAccess
 
 
             await configurationDbContext.Clients.AddAsync(client);
-            await configurationDbContext.Clients.AddAsync(passClient);
 
             await configurationDbContext.ClientCorsOrigins.AddAsync(new ClientCorsOrigin
             {
@@ -377,171 +323,167 @@ namespace ECommerce.Core.DataAccess
         {
             if (!eCommerceDbContext.Products.Any())
             {
-                await SeedProducts(eCommerceDbContext);
+                await SeedResources(eCommerceDbContext);
             }
 
             await eCommerceDbContext.SaveChangesAsync();
         }
 
-        private static async Task SeedProducts(ECommerceDbContext eCommerceDbContext)
+        private static async Task SeedResources(ECommerceDbContext eCommerceDbContext)
         {
+            var categories = new List<Category>();
+
+            {
+                var electronics = new Category()
+                {
+                    Name = "Electronics",
+                };
+                var phones = new Category()
+                {
+                    Name = "Phones",
+                    Parent = electronics
+                };
+                var mobilePhones = new Category()
+                {
+                    Name = "Mobile phones",
+                    Parent = phones
+                };
+                var homePhones = new Category()
+                {
+                    Name = "Home phones",
+                    Parent = phones
+                };
+
+                categories.AddRange(new List<Category>() {electronics, phones, mobilePhones, homePhones});
+            }
+
+            
+
+            var mobilePhonesCat = categories.SingleOrDefault(c => c.Name == "Mobile phones");
+
             var products = new List<Product>()
             {
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi mi note 10",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi mi 10 pro",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "iPhone 12",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "iPhone 11",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "iPhone X",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi mi 10",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi mi 11",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi mi 11 ultra",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
                 new Product()
                 {
-                    Id = Guid.NewGuid(),
                     OwnerId = new Guid("7D2F4A75-B474-4FC4-B46D-F9545A971FA0"),
                     Name = "Xiaomi redmi note 9 pro",
                     Description = "New xiaomi mi note 10 smartphone",
-                    Category = CategoryEnum.Electronics,
+                    Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
                     CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
-                    //Characteristics = new Dictionary<string, string>()
-                    //{
-                    //    ["Type ch1"] = "value1",
-                    //    ["Type ch12"] = "value2"
-                    //}
                 },
             };
 
+            var characteristics = new List<Characteristic>()
+            {
+                new CharacteristicNumberType()
+                {
+                    Name = "Selfie camera",
+                    ValueNum = 16,
+                    Category = categories.SingleOrDefault(c => c.Name == "Mobile phones"),
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
+                },
+                new CharacteristicStringType()
+                {
+                    Name = "Display",
+                    ValueStr = "AMOLED",
+                    Category = categories.SingleOrDefault(c => c.Name == "Mobile phones"),
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
+                }
+            };
+
+            await eCommerceDbContext.AddRangeAsync(characteristics);
+            await eCommerceDbContext.AddRangeAsync(categories);
             await eCommerceDbContext.AddRangeAsync(products);
         }
     }

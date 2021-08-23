@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Core.DataAccess.Dtos.User;
+using ECommerce.Core.DataAccess.Dtos.UserDtos;
 
 namespace ECommerce.Core.Application.AutoMapperProfiles
 {

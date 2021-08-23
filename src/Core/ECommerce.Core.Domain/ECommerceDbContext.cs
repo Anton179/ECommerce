@@ -5,6 +5,7 @@ using ECommerce.Core.DataAccess.Schemas;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ECommerce.Core.DataAccess.Entities.Characteristics;
 
 namespace ECommerce.Core.DataAccess
 {
@@ -14,7 +15,12 @@ namespace ECommerce.Core.DataAccess
         {
         }
 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Characteristic> Characteristics { get; set; }
+        public DbSet<CharacteristicNumberType> CharacteristicsNumber { get; set; }
+        public DbSet<CharacteristicStringType> CharacteristicsString { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

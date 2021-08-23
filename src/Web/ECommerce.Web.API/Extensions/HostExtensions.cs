@@ -21,6 +21,7 @@ namespace ECommerce.Web.API.Extensions
                     var ecommerceDbContext = services.GetRequiredService<ECommerceDbContext>();
 
                     await Seed.SeedApiServer(ecommerceDbContext);
+
                 }
                 catch (Exception exception)
                 {

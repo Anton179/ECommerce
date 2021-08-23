@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ECommerce.Core.Application.Queries.Users;
 using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Core.DataAccess.Dtos.User;
+using ECommerce.Core.DataAccess.Dtos.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System.Threading;

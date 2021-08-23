@@ -226,14 +226,98 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.ToTable("UserRoles", "Auth");
                 });
 
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristics.Characteristic", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Characteristics");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Characteristic");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -262,9 +346,31 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristics.CharacteristicNumberType", b =>
+                {
+                    b.HasBaseType("ECommerce.Core.DataAccess.Entities.Characteristics.Characteristic");
+
+                    b.Property<double?>("ValueNum")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("CharacteristicNumberType");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristics.CharacteristicStringType", b =>
+                {
+                    b.HasBaseType("ECommerce.Core.DataAccess.Entities.Characteristics.Characteristic");
+
+                    b.Property<string>("ValueStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("CharacteristicStringType");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Auth.RoleClaim", b =>
@@ -318,20 +424,93 @@ namespace ECommerce.Core.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Category", b =>
+                {
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.Category", "Parent")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristics.Characteristic", b =>
+                {
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.Category", "Category")
+                        .WithMany("Characteristics")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.Product", "Product")
+                        .WithMany("Characteristics")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Order", b =>
+                {
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Core.DataAccess.Auth.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
                 {
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("ECommerce.Core.DataAccess.Auth.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Auth.User", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Category", b =>
+                {
+                    b.Navigation("Characteristics");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
+                {
+                    b.Navigation("Characteristics");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

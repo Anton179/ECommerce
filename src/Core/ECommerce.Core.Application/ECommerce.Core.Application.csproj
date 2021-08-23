@@ -20,8 +20,4 @@
     <ProjectReference Include="..\ECommerce.Core.Domain\ECommerce.Core.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\AccountCommands\" />
-  </ItemGroup>
-
 </Project>

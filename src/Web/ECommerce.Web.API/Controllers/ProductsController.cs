@@ -1,6 +1,6 @@
 ﻿using ECommerce.Core.Application.Commands.ProductCommands;
 using ECommerce.Core.Application.Queries.Products;
-using ECommerce.Core.DataAccess.Dtos.Product;
+using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace ECommerce.Web.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        [Authorize(Roles = "vendor")]
         [HttpPost("create")]
         public async Task<ActionResult<Guid>> CreateProduct([FromBody] CreateProductCommand request)
         {

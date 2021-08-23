@@ -1,9 +1,7 @@
 ﻿using ECommerce.Core.DataAccess.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
-using IdentityServer4.Extensions;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 
 namespace ECommerce.Infrastructure.API.Providers
 {

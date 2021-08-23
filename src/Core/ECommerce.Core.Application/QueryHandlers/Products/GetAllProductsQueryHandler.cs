@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ECommerce.Core.DataAccess.Interfaces;
 using ECommerce.Core.Application.Queries.Products;
-using ECommerce.Core.DataAccess.Dtos.Product;
+using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using ECommerce.Core.DataAccess.Entities;
 using MediatR;
 
