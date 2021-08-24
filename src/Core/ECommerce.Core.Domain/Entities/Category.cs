@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Entities.Characteristics;
+using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 
 namespace ECommerce.Core.DataAccess.Entities
 {

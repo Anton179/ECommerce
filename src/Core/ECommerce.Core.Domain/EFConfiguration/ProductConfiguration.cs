@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ECommerce.Core.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -16,7 +17,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
 
             builder.Property(p => p.Description)
                 .IsRequired()
-                .HasMaxLength(300);
+                .HasMaxLength(255);
 
             builder.Property(p => p.Weight)
                 .IsRequired();
@@ -24,13 +25,25 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
             builder.Property(p => p.Price)
                 .IsRequired();
 
+            builder.Property(p => p.ImageUrl)
+                .IsRequired();
+
+            builder.Property(p => p.CreatedAt)
+                .HasDefaultValue(DateTime.Today);
+
+            builder.Property(p => p.RowVersion)
+                .IsRowVersion();
+
             builder.HasOne(p => p.User)
                 .WithMany(u => u.Products)
-                .HasForeignKey(p => p.OwnerId);
+                .HasForeignKey(p => p.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(p => p.Characteristics)
+            builder.HasMany(p => p.CharacteristicsValue)
                 .WithOne(ch => ch.Product)
-                .HasForeignKey(ch => ch.ProductId);
+                .HasForeignKey(ch => ch.ProductId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -10,7 +10,7 @@ using ECommerce.Core.Application.Queries.Products;
 using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using ECommerce.Core.DataAccess.Dtos.UserDtos;
 using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Entities.Characteristics;
+using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,18 +32,6 @@ namespace ECommerce.Core.Application.QueryHandlers.Products
             var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
 
             var result = _mapper.Map<ProductDto>(product);
-
-            foreach (var characteristic in result.Characteristics)
-            {
-                if (product.Characteristics.FirstOrDefault(ch => ch.Name == characteristic.Name) is CharacteristicNumberType )
-                {
-                    characteristic.ValueNum = ((CharacteristicNumberType)product.Characteristics.FirstOrDefault(ch => ch.Name == characteristic.Name)).ValueNum;
-                }
-                else
-                {
-                    characteristic.ValueStr = ((CharacteristicStringType)product.Characteristics.FirstOrDefault(ch => ch.Name == characteristic.Name)).ValueStr;
-                }
-            }
 
             return result;
         }

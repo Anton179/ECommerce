@@ -12,6 +12,6 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         public double Price { get; set; }
         public double Weight { get; set; }
         public string ImageUrl { get; set; }
-        public string Characteristics { get; set; }
+        public string CharacteristicsValue { get; set; }
     }
 }

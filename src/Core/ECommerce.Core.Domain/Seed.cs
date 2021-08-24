@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Entities.Characteristics;
+using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 using ApiResource = IdentityServer4.EntityFramework.Entities.ApiResource;
 using ApiScope = IdentityServer4.EntityFramework.Entities.ApiScope;
 using Client = IdentityServer4.EntityFramework.Entities.Client;
@@ -334,10 +334,39 @@ namespace ECommerce.Core.DataAccess
             var categories = new List<Category>();
 
             {
+                var other = new Category()
+                {
+                    Name = "Other"
+                };
+                var musicalInstruments = new Category()
+                {
+                    Name = "Musical Instruments"
+                };
+                var clothes = new Category()
+                {
+                    Name = "Clothes"
+                };
+                var fishing = new Category()
+                {
+                    Name = "Fishing"
+                };
+                var autoAccessories = new Category()
+                {
+                    Name = "Auto Accessories"
+                };
+                var homeAndGarden = new Category()
+                {
+                    Name = "Home and Garden"
+                };
+                var sports = new Category()
+                {
+                    Name = "Sports"
+                };
                 var electronics = new Category()
                 {
                     Name = "Electronics",
                 };
+
                 var phones = new Category()
                 {
                     Name = "Phones",
@@ -345,21 +374,66 @@ namespace ECommerce.Core.DataAccess
                 };
                 var mobilePhones = new Category()
                 {
-                    Name = "Mobile phones",
+                    Name = "Mobile Phones",
                     Parent = phones
                 };
                 var homePhones = new Category()
                 {
-                    Name = "Home phones",
+                    Name = "Home Phones",
                     Parent = phones
                 };
+                var computersTablets = new Category()
+                {
+                    Name = "Computers and Tablets",
+                    Parent = electronics
+                };
+                var hardware = new Category()
+                {
+                    Name = "Hardware",
+                    Parent = electronics
+                };
+                var consoles = new Category()
+                {
+                    Name = "Consoles",
+                    Parent = electronics
+                };
+                var videoGames = new Category()
+                {
+                    Name = "Video Games",
+                    Parent = consoles
+                };
 
-                categories.AddRange(new List<Category>() {electronics, phones, mobilePhones, homePhones});
+                var women = new Category()
+                {
+                    Name = "Women's Clothing",
+                    Parent = clothes
+                };
+                var men = new Category()
+                {
+                    Name = "Men's Clothing",
+                    Parent = clothes
+                };
+                var menJeans = new Category()
+                {
+                    Name = "Men's Jeans",
+                    Parent = men
+                };
+                var womenJeans = new Category()
+                {
+                    Name = "Women's Jeans",
+                    Parent = women
+                };
+
+                categories.AddRange(new List<Category>()
+                {
+                    other, musicalInstruments, clothes, fishing, autoAccessories, homeAndGarden, sports, electronics, phones, mobilePhones, homePhones,
+                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans
+                });
             }
 
-            
 
-            var mobilePhonesCat = categories.SingleOrDefault(c => c.Name == "Mobile phones");
+
+            var mobilePhonesCat = categories.SingleOrDefault(c => c.Name == "Mobile Phones");
 
             var products = new List<Product>()
             {
@@ -466,23 +540,83 @@ namespace ECommerce.Core.DataAccess
 
             var characteristics = new List<Characteristic>()
             {
-                new CharacteristicNumberType()
+                new Characteristic()
                 {
                     Name = "Selfie camera",
+                    Category = mobilePhonesCat
+                },
+                new Characteristic()
+                {
+                    Name = "Display",
+                    Category = mobilePhonesCat
+                },
+            };
+
+            var characteristicsValues = new List<CharacteristicValue>()
+            {
+                new CharacteristicNumberType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
                     ValueNum = 16,
-                    Category = categories.SingleOrDefault(c => c.Name == "Mobile phones"),
                     Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
                 },
                 new CharacteristicStringType()
                 {
-                    Name = "Display",
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Category = categories.SingleOrDefault(c => c.Name == "Mobile phones"),
                     Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
+                },
+
+                new CharacteristicNumberType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
+                    ValueNum = 16,
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 10 pro")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
+                    ValueStr = "AMOLED",
+                    Product = products.SingleOrDefault(c => c.Name == "iPhone 12")
+                },new CharacteristicNumberType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
+                    ValueNum = 16,
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 10")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
+                    ValueStr = "AMOLED",
+                    Product = products.SingleOrDefault(c => c.Name == "iPhone X")
+                },new CharacteristicNumberType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
+                    ValueNum = 16,
+                    Product = products.SingleOrDefault(c => c.Name == "iPhone 11")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
+                    ValueStr = "AMOLED",
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 11")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
+                    ValueStr = "AMOLED",
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 11 ultra")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
+                    ValueStr = "AMOLED",
+                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi redmi note 9 pro")
                 }
             };
 
             await eCommerceDbContext.AddRangeAsync(characteristics);
+            await eCommerceDbContext.AddRangeAsync(characteristicsValues);
             await eCommerceDbContext.AddRangeAsync(categories);
             await eCommerceDbContext.AddRangeAsync(products);
         }

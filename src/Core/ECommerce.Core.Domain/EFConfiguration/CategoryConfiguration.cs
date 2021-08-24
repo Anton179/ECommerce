@@ -15,11 +15,17 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
         {
             builder.Property(p => p.Name)
                 .IsRequired()
-                .HasMaxLength(40);
+                .HasMaxLength(100);
 
             builder.HasMany(c => c.SubCategories)
                 .WithOne(c => c.Parent)
                 .HasForeignKey(c => c.ParentId);
+
+            builder.Property(p => p.CreatedAt)
+                .HasDefaultValue(DateTime.Today);
+
+            builder.Property(p => p.RowVersion)
+                .IsRowVersion();
 
             builder.HasMany(c => c.Products)
                 .WithOne(p => p.Category)

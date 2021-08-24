@@ -22,6 +22,6 @@ namespace ECommerce.Core.DataAccess.Dtos.ProductDtos
         public string ImageUrl { get; set; }
         public virtual UserDto User { get; set; }
         public virtual CategoryWithParentDto Category { get; set; }
-        public virtual ICollection<CharacteristicDto> Characteristics { get; set; }
+        public virtual ICollection<CharacteristicValueDto> CharacteristicsValue { get; set; }
     }
 }

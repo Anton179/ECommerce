@@ -16,8 +16,9 @@ namespace ECommerce.Core.DataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 23, 0, 0, 0, 0, DateTimeKind.Local)),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,6 +77,26 @@ namespace ECommerce.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Characteristics",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Characteristics", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Characteristics_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 schema: "Auth",
                 columns: table => new
@@ -103,14 +124,15 @@ namespace ECommerce.Core.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 23, 0, 0, 0, 0, DateTimeKind.Local)),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,32 +246,32 @@ namespace ECommerce.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Characteristics",
+                name: "CharacteristicsValue",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CharacteristicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ValueNum = table.Column<double>(type: "float", nullable: true),
                     ValueStr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Characteristics", x => x.Id);
+                    table.PrimaryKey("PK_CharacteristicsValue", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Characteristics_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Characteristics_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_CharacteristicsValue_Characteristics_CharacteristicId",
+                        column: x => x.CharacteristicId,
+                        principalTable: "Characteristics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacteristicsValue_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -257,10 +279,11 @@ namespace ECommerce.Core.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 23, 0, 0, 0, 0, DateTimeKind.Local)),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,7 +292,8 @@ namespace ECommerce.Core.DataAccess.Migrations
                         name: "FK_Orders_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Orders_Users_UserId",
                         column: x => x.UserId,
@@ -289,8 +313,13 @@ namespace ECommerce.Core.DataAccess.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Characteristics_ProductId",
-                table: "Characteristics",
+                name: "IX_CharacteristicsValue_CharacteristicId",
+                table: "CharacteristicsValue",
+                column: "CharacteristicId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacteristicsValue_ProductId",
+                table: "CharacteristicsValue",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -363,7 +392,7 @@ namespace ECommerce.Core.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Characteristics");
+                name: "CharacteristicsValue");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -387,6 +416,9 @@ namespace ECommerce.Core.DataAccess.Migrations
             migrationBuilder.DropTable(
                 name: "UserRoles",
                 schema: "Auth");
+
+            migrationBuilder.DropTable(
+                name: "Characteristics");
 
             migrationBuilder.DropTable(
                 name: "Products");
