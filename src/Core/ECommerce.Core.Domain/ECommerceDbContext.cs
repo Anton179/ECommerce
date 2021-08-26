@@ -20,7 +20,9 @@ namespace ECommerce.Core.DataAccess
         public DbSet<Product> Products { get; set; }
         public DbSet<Characteristic> Characteristics { get; set; }
         public DbSet<CharacteristicValue> CharacteristicsValue { get; set; }
-        public DbSet<CharacteristicNumberType> CharacteristicsNumber { get; set; }
+        public DbSet<CharacteristicDecimalType> CharacteristicsDecimal { get; set; }
+        public DbSet<CharacteristicIntType> CharacteristicsInt { get; set; }
+        public DbSet<CharacteristicDateType> CharacteristicsDate { get; set; }
         public DbSet<CharacteristicStringType> CharacteristicsString { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +32,12 @@ namespace ECommerce.Core.DataAccess
             var assembly = typeof(ProductConfiguration).Assembly;
 
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+
+            // TODO: Remove
+            //modelBuilder.Entity<CharacteristicDecimalType>().ToTable("CharacteristicDecimalType");
+            //modelBuilder.Entity<CharacteristicIntType>().ToTable("CharacteristicIntType");
+            //modelBuilder.Entity<CharacteristicDateType>().ToTable("CharacteristicDateType");
+            //modelBuilder.Entity<CharacteristicStringType>().ToTable("CharacteristicStringType");
 
             ApplyIdentityMapConfiguration(modelBuilder);
         }

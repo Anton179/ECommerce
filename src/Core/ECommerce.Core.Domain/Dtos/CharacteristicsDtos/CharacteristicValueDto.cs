@@ -1,9 +1,11 @@
-﻿namespace ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos
+﻿using System;
+
+namespace ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos
 {
     public class CharacteristicValueDto
     {
-        public CharacteristicDto Characteristic { get; set; }
-        public string ValueStr { get; set; }
-        public double ValueNum { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public object Value { get; set; }
     }
 }

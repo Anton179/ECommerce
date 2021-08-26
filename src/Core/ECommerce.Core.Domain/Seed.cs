@@ -340,31 +340,38 @@ namespace ECommerce.Core.DataAccess
                 };
                 var musicalInstruments = new Category()
                 {
-                    Name = "Musical Instruments"
+                    Name = "Musical Instruments",
+                    Image = "assets/img/Categories/MusicalInstruments.png"
                 };
                 var clothes = new Category()
                 {
-                    Name = "Clothes"
+                    Name = "Clothes",
+                    Image = "assets/img/Categories/Clothes.png"
                 };
                 var fishing = new Category()
                 {
-                    Name = "Fishing"
+                    Name = "Fishing",
+                    Image = "assets/img/Categories/Fishing.png"
                 };
                 var autoAccessories = new Category()
                 {
-                    Name = "Auto Accessories"
+                    Name = "Auto Accessories",
+                    Image = "assets/img/Categories/AutoAccessories.png"
                 };
                 var homeAndGarden = new Category()
                 {
-                    Name = "Home and Garden"
+                    Name = "Home and Garden",
+                    Image = "assets/img/Categories/Home&Garden.png"
                 };
                 var sports = new Category()
                 {
-                    Name = "Sports"
+                    Name = "Sports",
+                    Image = "assets/img/Categories/Sports.png"
                 };
                 var electronics = new Category()
                 {
                     Name = "Electronics",
+                    Image = "assets/img/Categories/Electronics.png"
                 };
 
                 var phones = new Category()
@@ -433,7 +440,7 @@ namespace ECommerce.Core.DataAccess
 
 
 
-            var mobilePhonesCat = categories.SingleOrDefault(c => c.Name == "Mobile Phones");
+            var mobilePhonesCat = categories.FirstOrDefault(c => c.Name == "Mobile Phones");
 
             var products = new List<Product>()
             {
@@ -550,68 +557,122 @@ namespace ECommerce.Core.DataAccess
                     Name = "Display",
                     Category = mobilePhonesCat
                 },
+                new Characteristic()
+                {
+                    Name = "Released",
+                    Category = categories.FirstOrDefault(c => c.Name == "Electronics")
+                },
             };
 
             var characteristicsValues = new List<CharacteristicValue>()
             {
-                new CharacteristicNumberType()
+                new CharacteristicDecimalType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
-                    ValueNum = 16,
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
+                    ValueDec = 16,
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi note 10")
+                },
+                new CharacteristicDateType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Released"),
+                    ValueDate = new DateTime(2021, 3, 21),
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi note 10")
                 },
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi note 10")
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi note 10")
                 },
 
-                new CharacteristicNumberType()
+                // ----------------------------------
+
+                new CharacteristicDecimalType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
-                    ValueNum = 16,
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 10 pro")
+                    ValueDec = 16,
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 10 pro")
                 },
+                new CharacteristicDateType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Released"),
+                    ValueDate = new DateTime(2019, 11, 6),
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 10 pro")
+                },
+                
+                // ----------------------------------
+
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "iPhone 12")
-                },new CharacteristicNumberType()
+                    Product = products.FirstOrDefault(c => c.Name == "iPhone 12")
+                },
+                new CharacteristicDateType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Released"),
+                    ValueDate = new DateTime(2020, 10, 13),
+                    Product = products.FirstOrDefault(c => c.Name == "iPhone 12")
+                },
+                
+                // ----------------------------------
+
+                new CharacteristicDecimalType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
-                    ValueNum = 16,
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 10")
+                    ValueDec = 16,
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 10")
                 },
+                new CharacteristicDateType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Released"),
+                    ValueDate = new DateTime(2020, 2, 14),
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 10")
+                },
+                
+                // ----------------------------------
+
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "iPhone X")
-                },new CharacteristicNumberType()
+                    Product = products.FirstOrDefault(c => c.Name == "iPhone X")
+                },
+                
+                // ----------------------------------
+
+                new CharacteristicDecimalType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),
-                    ValueNum = 16,
-                    Product = products.SingleOrDefault(c => c.Name == "iPhone 11")
+                    ValueDec = 16,
+                    Product = products.FirstOrDefault(c => c.Name == "iPhone 11")
                 },
+                
+                // ----------------------------------
+
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 11")
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 11")
                 },
+                
+                // ----------------------------------
+
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi mi 11 ultra")
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi mi 11 ultra")
                 },
+                
+                // ----------------------------------
+
                 new CharacteristicStringType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Display"),
                     ValueStr = "AMOLED",
-                    Product = products.SingleOrDefault(c => c.Name == "Xiaomi redmi note 9 pro")
+                    Product = products.FirstOrDefault(c => c.Name == "Xiaomi redmi note 9 pro")
                 }
             };
 

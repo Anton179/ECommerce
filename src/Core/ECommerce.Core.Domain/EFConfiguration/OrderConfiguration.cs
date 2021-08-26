@@ -17,7 +17,8 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .IsRequired();
 
             builder.Property(o => o.CreatedAt)
-                .HasDefaultValue(DateTime.Today);
+                .HasDefaultValue(DateTime.Today)
+                .HasColumnType("Date");
 
             builder.Property(o => o.RowVersion)
                 .IsRowVersion();

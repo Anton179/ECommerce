@@ -4,14 +4,16 @@ using ECommerce.Core.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Core.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210825095308_UpdatedCharacteristicsEntity")]
+    partial class UpdatedCharacteristicsEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -411,8 +413,9 @@ namespace ECommerce.Core.DataAccess.Migrations
                 {
                     b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
 
-                    b.Property<DateTime>("ValueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("Value")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CharacteristicDateType_Value");
 
                     b.HasDiscriminator().HasValue("CharacteristicDateType");
                 });
@@ -421,8 +424,9 @@ namespace ECommerce.Core.DataAccess.Migrations
                 {
                     b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
 
-                    b.Property<decimal>("ValueDec")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("CharacteristicDecimalType_Value");
 
                     b.HasDiscriminator().HasValue("CharacteristicDecimalType");
                 });
@@ -431,8 +435,9 @@ namespace ECommerce.Core.DataAccess.Migrations
                 {
                     b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
 
-                    b.Property<int>("ValueInt")
-                        .HasColumnType("int");
+                    b.Property<int>("Value")
+                        .HasColumnType("int")
+                        .HasColumnName("CharacteristicIntType_Value");
 
                     b.HasDiscriminator().HasValue("CharacteristicIntType");
                 });
@@ -441,7 +446,7 @@ namespace ECommerce.Core.DataAccess.Migrations
                 {
                     b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
 
-                    b.Property<string>("ValueStr")
+                    b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("CharacteristicStringType");

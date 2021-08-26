@@ -4,14 +4,16 @@ using ECommerce.Core.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Core.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210824133914_UpdatedCategoryEntity")]
+    partial class UpdatedCategoryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,8 +236,8 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -295,9 +297,7 @@ namespace ECommerce.Core.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -330,8 +330,8 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -367,8 +367,8 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -407,34 +407,14 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicDateType", b =>
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicNumberType", b =>
                 {
                     b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
 
-                    b.Property<DateTime>("ValueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<double>("ValueNum")
+                        .HasColumnType("float");
 
-                    b.HasDiscriminator().HasValue("CharacteristicDateType");
-                });
-
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicDecimalType", b =>
-                {
-                    b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
-
-                    b.Property<decimal>("ValueDec")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasDiscriminator().HasValue("CharacteristicDecimalType");
-                });
-
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicIntType", b =>
-                {
-                    b.HasBaseType("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue");
-
-                    b.Property<int>("ValueInt")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("CharacteristicIntType");
+                    b.HasDiscriminator().HasValue("CharacteristicNumberType");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicStringType", b =>
@@ -521,13 +501,13 @@ namespace ECommerce.Core.DataAccess.Migrations
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue", b =>
                 {
                     b.HasOne("ECommerce.Core.DataAccess.Entities.Characteristic", "Characteristic")
-                        .WithMany("Characteristics")
+                        .WithMany("CharacteristicValues")
                         .HasForeignKey("CharacteristicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ECommerce.Core.DataAccess.Entities.Product", "Product")
-                        .WithMany("Characteristics")
+                        .WithMany("CharacteristicsValue")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -591,12 +571,12 @@ namespace ECommerce.Core.DataAccess.Migrations
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristic", b =>
                 {
-                    b.Navigation("Characteristics");
+                    b.Navigation("CharacteristicValues");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
                 {
-                    b.Navigation("Characteristics");
+                    b.Navigation("CharacteristicsValue");
 
                     b.Navigation("Orders");
                 });

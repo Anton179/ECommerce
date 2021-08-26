@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos
 {
-    public class CharacteristicDto
+    public abstract class CharacteristicDto
     {
         public string Name { get; set; }
     }

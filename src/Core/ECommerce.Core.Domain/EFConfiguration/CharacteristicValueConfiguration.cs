@@ -14,8 +14,12 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
         public void Configure(EntityTypeBuilder<CharacteristicValue> builder)
         {
             builder.HasOne(ch => ch.Characteristic)
-                .WithMany(ch => ch.CharacteristicValues)
+                .WithMany(ch => ch.Characteristics)
                 .HasForeignKey(ch => ch.CharacteristicId);
+
+            builder.Property(ch => ch.CreatedAt)
+                .HasDefaultValue(DateTime.Today)
+                .HasColumnType("Date");
 
             builder.Property(ch => ch.RowVersion)
                 .IsRowVersion();

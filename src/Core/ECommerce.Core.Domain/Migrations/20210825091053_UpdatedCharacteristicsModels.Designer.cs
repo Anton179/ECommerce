@@ -4,14 +4,16 @@ using ECommerce.Core.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Core.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210825091053_UpdatedCharacteristicsModels")]
+    partial class UpdatedCharacteristicsModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,13 +523,13 @@ namespace ECommerce.Core.DataAccess.Migrations
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicValue", b =>
                 {
                     b.HasOne("ECommerce.Core.DataAccess.Entities.Characteristic", "Characteristic")
-                        .WithMany("Characteristics")
+                        .WithMany("CharacteristicValues")
                         .HasForeignKey("CharacteristicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ECommerce.Core.DataAccess.Entities.Product", "Product")
-                        .WithMany("Characteristics")
+                        .WithMany("CharacteristicsValue")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -591,12 +593,12 @@ namespace ECommerce.Core.DataAccess.Migrations
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Characteristic", b =>
                 {
-                    b.Navigation("Characteristics");
+                    b.Navigation("CharacteristicValues");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
                 {
-                    b.Navigation("Characteristics");
+                    b.Navigation("CharacteristicsValue");
 
                     b.Navigation("Orders");
                 });

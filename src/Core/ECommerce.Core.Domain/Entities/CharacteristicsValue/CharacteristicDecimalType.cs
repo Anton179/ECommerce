@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Core.DataAccess.Entities.CharacteristicsValue
 {
-    public class CharacteristicNumberType : CharacteristicValue
+    public class CharacteristicDecimalType : CharacteristicValue
     {
-        public double ValueNum { get; set; }
+        public decimal ValueDec { get; set; }
     }
 }

@@ -29,17 +29,11 @@ namespace ECommerce.Core.DataAccess.Repository
 
         public void DeleteRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().RemoveRange(entities);
 
-        public TEntity GetById(Guid id) => _context.Set<TEntity>().SingleOrDefault(e => e.Id == id);
-
         public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
-            await _context.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id, cancellationToken);
-
-        public List<TEntity> List() => _context.Set<TEntity>().ToList();
+            await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
         public async Task<List<TEntity>> ListAsync(CancellationToken cancellationToken = default) =>
             await _context.Set<TEntity>().ToListAsync(cancellationToken);
-
-        public IQueryable<TEntity> Read() => _context.Set<TEntity>().OrderBy(e => e.Id);
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
 

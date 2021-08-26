@@ -29,7 +29,8 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .IsRequired();
 
             builder.Property(p => p.CreatedAt)
-                .HasDefaultValue(DateTime.Today);
+                .HasDefaultValue(DateTime.Today)
+                .HasColumnType("Date");
 
             builder.Property(p => p.RowVersion)
                 .IsRowVersion();
@@ -39,7 +40,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .HasForeignKey(p => p.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(p => p.CharacteristicsValue)
+            builder.HasMany(p => p.Characteristics)
                 .WithOne(ch => ch.Product)
                 .HasForeignKey(ch => ch.ProductId)
                 .IsRequired()
