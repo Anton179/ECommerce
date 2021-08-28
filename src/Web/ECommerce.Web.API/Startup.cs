@@ -65,7 +65,7 @@ namespace ECommerce.Web.API
             services.AddHttpContextAccessor();
             services.AddTransient<ICurrentUserProvider, CurrentUserProvider>();
             //services.AddTransient<IUserProvider, UserProvider>();
-            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(BaseCreateUpdateProductHandler).Assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateProductHandler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

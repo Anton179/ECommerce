@@ -24,6 +24,7 @@ namespace ECommerce.Core.DataAccess
         public DbSet<CharacteristicIntType> CharacteristicsInt { get; set; }
         public DbSet<CharacteristicDateType> CharacteristicsDate { get; set; }
         public DbSet<CharacteristicStringType> CharacteristicsString { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

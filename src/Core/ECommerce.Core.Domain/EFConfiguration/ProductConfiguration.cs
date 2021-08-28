@@ -28,10 +28,6 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
             builder.Property(p => p.ImageUrl)
                 .IsRequired();
 
-            builder.Property(p => p.CreatedAt)
-                .HasDefaultValue(DateTime.Today)
-                .HasColumnType("Date");
-
             builder.Property(p => p.RowVersion)
                 .IsRowVersion();
 

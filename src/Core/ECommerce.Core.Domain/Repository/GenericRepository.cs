@@ -37,6 +37,8 @@ namespace ECommerce.Core.DataAccess.Repository
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
 
+        public IQueryable<TEntity> Read() => _context.Set<TEntity>();
+
         public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
 
         public void UpdateRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().UpdateRange(entities);

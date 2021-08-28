@@ -33,7 +33,7 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("all")]
-        public async Task<ActionResult<ProductDto>> GetProducts(CancellationToken cancellationToken)
+        public async Task<ActionResult<ProductForDisplayDto>> GetProducts(CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetAllProductsQuery(), cancellationToken);
 

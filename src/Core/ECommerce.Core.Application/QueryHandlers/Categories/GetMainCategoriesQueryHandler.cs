@@ -10,6 +10,7 @@ using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Core.Application.QueryHandlers.Categories
 {
@@ -27,7 +28,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Categories
         public async Task<IEnumerable<CategoryWithImageDto>> Handle(GetMainCategoriesQuery request,
             CancellationToken cancellationToken)
         {
-            var mainCategories = _repository.ListAsync(cancellationToken)?.Result.Where(c => c.Parent == null && !String.IsNullOrEmpty(c.Image));
+            var mainCategories = await _repository.Read().Where(c => c.Parent == null && !String.IsNullOrEmpty(c.Image)).ToListAsync(cancellationToken);
 
             var result = _mapper.Map<List<CategoryWithImageDto>>(mainCategories);
 

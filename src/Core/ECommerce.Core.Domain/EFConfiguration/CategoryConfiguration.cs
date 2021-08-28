@@ -21,10 +21,6 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .WithOne(c => c.Parent)
                 .HasForeignKey(c => c.ParentId);
 
-            builder.Property(p => p.CreatedAt)
-                .HasDefaultValue(DateTime.Today)
-                .HasColumnType("Date");
-
             builder.Property(p => p.RowVersion)
                 .IsRowVersion();
 

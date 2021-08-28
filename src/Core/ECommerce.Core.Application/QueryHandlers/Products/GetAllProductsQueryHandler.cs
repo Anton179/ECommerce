@@ -10,7 +10,7 @@ using MediatR;
 
 namespace ECommerce.Core.Application.QueryHandlers.Products
 {
-    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, IEnumerable<ProductDto>>
+    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, IEnumerable<ProductForDisplayDto>>
     {
         private readonly IGenericRepository<Product> _productRepository;
         private readonly IMapper _mapper;
@@ -21,11 +21,11 @@ namespace ECommerce.Core.Application.QueryHandlers.Products
             _productRepository = productRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductForDisplayDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await _productRepository.ListAsync(cancellationToken);
 
-            var result = _mapper.Map<List<ProductDto>>(products);
+            var result = _mapper.Map<List<ProductForDisplayDto>>(products);
 
             return result;
         }

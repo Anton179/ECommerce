@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
 {
-    public class CreateProductHandler : BaseCreateUpdateProductHandler, IRequestHandler<CreateProductCommand, Guid>
+    public class CreateProductHandler : IRequestHandler<CreateProductCommand, Guid>
     {
         private readonly IGenericRepository<Product> _productRepository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserProvider _currentUserProvider;
 
         public CreateProductHandler(IGenericRepository<Product> repository, IMapper mapper,
-            IMediator mediator,
-            ICurrentUserProvider currentUserProvider) : base(mediator)
+            ICurrentUserProvider currentUserProvider)
         {
             _productRepository = repository;
             _mapper = mapper;

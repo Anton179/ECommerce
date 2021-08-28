@@ -37,6 +37,23 @@ namespace ECommerce.Core.DataAccess
                 {
                     var user = new User
                     {
+                        UserName = "admin",
+                        Email = "anichitenco@gmail.com",
+                        EmailConfirmed = true,
+                    };
+
+                    var result = await userManager.CreateAsync(user, "admin");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
+                        await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
+                        await userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                        await userManager.AddToRoleAsync(user, "admin");
+                    }
+                }
+                {
+                    var user = new User
+                    {
                         Id = new Guid("7D55490E-E76D-4713-BBF3-B3EC8912A8D7"),
                         UserName = "Anton179",
                         Email = "anichitenco@gmail.com",
@@ -49,7 +66,7 @@ namespace ECommerce.Core.DataAccess
                         await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
                         await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
                         await userManager.AddClaimAsync(user, new Claim("email", user.Email));
-                        await userManager.AddToRoleAsync(user, "admin");
+                        await userManager.AddToRoleAsync(user, "user");
                     }
                 }
                 {
@@ -452,7 +469,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -463,7 +479,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -474,7 +489,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -485,7 +499,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -496,7 +509,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -507,7 +519,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -518,7 +529,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -529,7 +539,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
                 new Product()
@@ -540,7 +549,6 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    CreatedAt = DateTime.Today,
                     ImageUrl = "assets/img/Products/Smartphone.png",
                 },
             };

@@ -17,6 +17,7 @@ namespace ECommerce.Core.DataAccess.Interfaces
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteRange(IEnumerable<TEntity> entities);
+        IQueryable<TEntity> Read();
         Task<int> SaveChangesAsync();
     }
 }

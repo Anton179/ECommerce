@@ -17,6 +17,7 @@ namespace ECommerce.Core.DataAccess.Entities
         public string ImageUrl { get; set; }
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<CharacteristicValue> Characteristics { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
