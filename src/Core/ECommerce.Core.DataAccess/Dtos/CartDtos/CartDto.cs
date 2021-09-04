@@ -1,4 +1,5 @@
-﻿using ECommerce.Core.DataAccess.Dtos.ProductDtos;
+﻿using System;
+using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 
 namespace ECommerce.Core.DataAccess.Dtos.CartDtos
 {

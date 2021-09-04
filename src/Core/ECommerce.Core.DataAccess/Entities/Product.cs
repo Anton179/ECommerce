@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using ECommerce.Core.DataAccess.Auth;
+﻿using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
-using ECommerce.Core.DataAccess.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace ECommerce.Core.DataAccess.Entities
 {

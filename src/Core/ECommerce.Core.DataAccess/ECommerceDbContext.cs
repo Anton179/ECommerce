@@ -34,12 +34,6 @@ namespace ECommerce.Core.DataAccess
 
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
-            // TODO: Remove
-            //modelBuilder.Entity<CharacteristicDecimalType>().ToTable("CharacteristicDecimalType");
-            //modelBuilder.Entity<CharacteristicIntType>().ToTable("CharacteristicIntType");
-            //modelBuilder.Entity<CharacteristicDateType>().ToTable("CharacteristicDateType");
-            //modelBuilder.Entity<CharacteristicStringType>().ToTable("CharacteristicStringType");
-
             ApplyIdentityMapConfiguration(modelBuilder);
         }
 

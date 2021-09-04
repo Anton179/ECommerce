@@ -15,10 +15,10 @@ using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
 using ECommerce.Core.DataAccess.ViewModels.Consent;
-using ECommerce.Web.IdentitySever.Attributes;
-using ECommerce.Web.IdentitySever.Extensions;
+using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.Extensions;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     /// <summary>
     /// This controller processes the consent UI

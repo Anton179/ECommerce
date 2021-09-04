@@ -17,7 +17,7 @@ namespace ECommerce.Infrastructure.API.Providers
         public Guid GetUserId()
         {
 
-            var userId = _httpContext.User.Claims.FirstOrDefault(x => x.Type == "sub").Value;
+            var userId = _httpContext.User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
 
             return new Guid(userId);
         }

@@ -5,12 +5,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.ViewModels.Diagnostics;
-using ECommerce.Web.IdentitySever.Attributes;
+using ECommerce.Web.IdentityServer.Attributes;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     [SecurityHeaders]
     [Authorize]

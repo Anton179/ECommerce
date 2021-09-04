@@ -1,23 +1,19 @@
 using ECommerce.Core.Application.AutoMapperProfiles;
 using ECommerce.Core.Application.CommandHandlers.ProductHandlers;
-using ECommerce.Core.DataAccess.Interfaces;
 using ECommerce.Core.DataAccess;
-using ECommerce.Core.DataAccess.Auth;
+using ECommerce.Core.DataAccess.Interfaces;
 using ECommerce.Infrastructure.API.Providers;
-using ECommerce.Web.API.Extensions;
-using IdentityServer4.AccessTokenValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using ECommerce.Infrastructure.IdentityServer.Providers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ECommerce.Infrastructure.API.Extensions;
 
 namespace ECommerce.Web.API
 {
@@ -64,7 +60,6 @@ namespace ECommerce.Web.API
             services.AddRepositories();
             services.AddHttpContextAccessor();
             services.AddTransient<ICurrentUserProvider, CurrentUserProvider>();
-            //services.AddTransient<IUserProvider, UserProvider>();
             services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateProductHandler).Assembly);
         }
 

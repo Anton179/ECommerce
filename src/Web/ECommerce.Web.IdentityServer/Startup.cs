@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace ECommerce.Web.IdentitySever
+namespace ECommerce.Web.IdentityServer
 {
     public class Startup
     {

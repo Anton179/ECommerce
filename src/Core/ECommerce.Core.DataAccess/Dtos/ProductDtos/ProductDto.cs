@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
+﻿using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
 using ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos;
 using ECommerce.Core.DataAccess.Dtos.UserDtos;
-using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace ECommerce.Core.DataAccess.Dtos.ProductDtos
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ECommerce.Web.IdentitySever.Attributes
+namespace ECommerce.Web.IdentityServer.Attributes
 {
     public class SecurityHeadersAttribute : ActionFilterAttribute
     {

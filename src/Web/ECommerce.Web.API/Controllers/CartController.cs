@@ -50,12 +50,21 @@ namespace ECommerce.Web.API.Controllers
         }
 
         [Authorize]
-        [HttpDelete("clear")]
-        public async Task<ActionResult> ClearCartByCurrentUser(CancellationToken cancellationToken)
+        [HttpDelete("removeAll")]
+        public async Task<ActionResult> RemoveAllByCurrentUser(CancellationToken cancellationToken)
         {
-            var resutl = await _mediator.Send(new DeleteCartCommand(), cancellationToken);
+            var result = await _mediator.Send(new DeleteAllCartCommand(), cancellationToken);
 
-            return Ok(resutl);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpDelete("remove/{productId}")]
+        public async Task<ActionResult> RemoveByCurrentUser([FromRoute] Guid productId, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new DeleteCartCommand() { ProductId = productId }, cancellationToken);
+
+            return Ok(result);
         }
     }
 }

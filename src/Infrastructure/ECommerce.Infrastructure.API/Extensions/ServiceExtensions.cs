@@ -1,12 +1,8 @@
 ﻿using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Infrastructure.API.Configuration;
 using ECommerce.Core.DataAccess.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 
-namespace ECommerce.Web.API.Extensions
+namespace ECommerce.Infrastructure.API.Extensions
 {
     public static class ServiceExtensions
     {

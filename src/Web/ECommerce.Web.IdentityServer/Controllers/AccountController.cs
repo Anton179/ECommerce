@@ -1,7 +1,7 @@
 ﻿using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Core.DataAccess.ViewModels.Account;
-using ECommerce.Web.IdentitySever.Attributes;
-using ECommerce.Web.IdentitySever.Extensions;
+using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.Extensions;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -17,7 +17,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     [SecurityHeaders]
     [AllowAnonymous]

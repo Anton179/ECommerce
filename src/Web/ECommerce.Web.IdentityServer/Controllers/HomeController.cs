@@ -10,9 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.ViewModels.Home;
-using ECommerce.Web.IdentitySever.Attributes;
+using ECommerce.Web.IdentityServer.Attributes;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     [SecurityHeaders]
     [AllowAnonymous]

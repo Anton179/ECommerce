@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ECommerce.Core.DataAccess;
 
-namespace ECommerce.Web.IdentitySever.Extensions
+namespace ECommerce.Web.IdentityServer.Extensions
 {
     public static class HostExtensions
     {

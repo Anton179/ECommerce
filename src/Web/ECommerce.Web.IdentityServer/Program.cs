@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ECommerce.Web.IdentitySever.Extensions;
+using ECommerce.Web.IdentityServer.Extensions;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace ECommerce.Web.IdentitySever
+namespace ECommerce.Web.IdentityServer
 {
     public class Program
     {

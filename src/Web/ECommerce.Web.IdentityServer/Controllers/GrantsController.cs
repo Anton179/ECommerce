@@ -9,12 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.ViewModels.Grant;
-using ECommerce.Web.IdentitySever.Attributes;
+using ECommerce.Web.IdentityServer.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients

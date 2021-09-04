@@ -15,11 +15,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Web.IdentitySever.Attributes;
-using ECommerce.Web.IdentitySever.Extensions;
+using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Identity;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     [SecurityHeaders]
     [AllowAnonymous]

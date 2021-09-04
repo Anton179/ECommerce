@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.ViewModels.Consent;
 using ECommerce.Core.DataAccess.ViewModels.Device;
-using ECommerce.Web.IdentitySever.Attributes;
+using ECommerce.Web.IdentityServer.Attributes;
 using IdentityServer4.Configuration;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ECommerce.Web.IdentitySever.Controllers
+namespace ECommerce.Web.IdentityServer.Controllers
 {
     [Authorize]
     [SecurityHeaders]

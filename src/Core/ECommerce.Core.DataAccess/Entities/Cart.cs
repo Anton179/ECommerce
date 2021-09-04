@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Auth;
+﻿using ECommerce.Core.DataAccess.Auth;
+using System;
 
 namespace ECommerce.Core.DataAccess.Entities
 {

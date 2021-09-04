@@ -1,6 +1,6 @@
 ﻿using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Enums;
+using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 using IdentityModel;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Entities;
@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 using ApiResource = IdentityServer4.EntityFramework.Entities.ApiResource;
 using ApiScope = IdentityServer4.EntityFramework.Entities.ApiScope;
 using Client = IdentityServer4.EntityFramework.Entities.Client;
