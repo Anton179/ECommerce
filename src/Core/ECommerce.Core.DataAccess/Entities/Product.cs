@@ -11,13 +11,14 @@ namespace ECommerce.Core.DataAccess.Entities
         public Guid CategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public double Weight { get; set; }
         public string ImageUrl { get; set; }
+        public bool InStock { get; set; } = true;
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<CharacteristicValue> Characteristics { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderProducts> Orders { get; set; }
     }
 }

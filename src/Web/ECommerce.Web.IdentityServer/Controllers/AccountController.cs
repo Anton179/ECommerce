@@ -337,7 +337,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
             {
                 AutomaticRedirectAfterSignOut = AccountOptions.AutomaticRedirectAfterSignOut,
                 //PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
-                PostLogoutRedirectUri = "http://localhost:4200/signout-callback",
+                PostLogoutRedirectUri = "http://localhost:4200/auth/signout-callback",
                 ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
                 SignOutIframeUrl = logout?.SignOutIFrameUrl,
                 LogoutId = logoutId

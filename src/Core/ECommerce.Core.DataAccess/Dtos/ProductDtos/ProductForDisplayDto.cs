@@ -11,7 +11,7 @@ namespace ECommerce.Core.DataAccess.Dtos.ProductDtos
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public double Weight { get; set; }
     }
 }

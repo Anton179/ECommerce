@@ -220,7 +220,7 @@ namespace ECommerce.Core.DataAccess
                 }
             };
 
-            client.RedirectUris = new()
+            client.RedirectUris = new List<ClientRedirectUri>()
             {
                 new ClientRedirectUri
                 {
@@ -229,14 +229,14 @@ namespace ECommerce.Core.DataAccess
                 },
                 new ClientRedirectUri
                 {
-                    RedirectUri = "http://localhost:4200/signin-callback",
+                    RedirectUri = "http://localhost:4200/auth/signin-callback",
                     Client = client
                 }
             };
 
-            client.PostLogoutRedirectUris = new()
+            client.PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>()
             {
-                new ClientPostLogoutRedirectUri { PostLogoutRedirectUri = "http://localhost:4200/signout-callback", Client = client }
+                new ClientPostLogoutRedirectUri { PostLogoutRedirectUri = "http://localhost:4200/auth/signout-callback", Client = client }
             };
 
 
@@ -263,6 +263,21 @@ namespace ECommerce.Core.DataAccess
                         {
                             Value = "A1837CD3-TCDProject-5340-API-4B40-Resource-BE7C-55E5B5C9FAAB".ToSha256()
                         }
+                    },
+                    UserClaims = new List<ApiResourceClaim>()
+                    {
+                        new ApiResourceClaim()
+                        {
+                            Type = "sub"
+                        },
+                        new ApiResourceClaim()
+                        {
+                            Type = "userName"
+                        },
+                        new ApiResourceClaim()
+                        {
+                            Type = "email"
+                        },
                     },
                     Scopes = new List<ApiResourceScope>
                     {
@@ -347,6 +362,24 @@ namespace ECommerce.Core.DataAccess
 
         private static async Task SeedResources(ECommerceDbContext eCommerceDbContext)
         {
+            var shippings = new List<Shipping>()
+            {
+                new Shipping()
+                {
+                    Name = "Nova Poshta",
+                    Price = 25,
+                    Estimated = "7-14 days",
+                    Image = "assets/img/Delivery/novaposhta.png"
+                },
+                new Shipping()
+                {
+                    Name = "DHL Express",
+                    Price = 40,
+                    Estimated = "4-8 days",
+                    Image = "assets/img/Delivery/DHL.png"
+                }
+            };
+
             var categories = new List<Category>();
 
             {
@@ -479,6 +512,7 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImageUrl = "assets/img/Products/Smartphone.png",
+                    InStock = false
                 },
                 new Product()
                 {
@@ -489,6 +523,7 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImageUrl = "assets/img/Products/Smartphone.png",
+                    InStock = false
                 },
                 new Product()
                 {
@@ -509,6 +544,7 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImageUrl = "assets/img/Products/Smartphone.png",
+                    InStock = false
                 },
                 new Product()
                 {
@@ -683,6 +719,7 @@ namespace ECommerce.Core.DataAccess
                 }
             };
 
+            await eCommerceDbContext.AddRangeAsync(shippings);
             await eCommerceDbContext.AddRangeAsync(characteristics);
             await eCommerceDbContext.AddRangeAsync(characteristicsValues);
             await eCommerceDbContext.AddRangeAsync(categories);

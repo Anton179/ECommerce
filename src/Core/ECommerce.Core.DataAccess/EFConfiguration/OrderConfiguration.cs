@@ -8,16 +8,11 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.Property(o => o.Price)
+            builder.Property(o => o.DeliveryPrice)
                 .IsRequired();
 
             builder.Property(o => o.RowVersion)
                 .IsRowVersion();
-
-            builder.HasOne(o => o.Product)
-                .WithMany(p => p.Orders)
-                .HasForeignKey(o => o.ProductId)
-                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(o => o.User)
                 .WithMany(u => u.Orders)

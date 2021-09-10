@@ -1,3 +1,4 @@
+using System.IO;
 using ECommerce.Core.Application.AutoMapperProfiles;
 using ECommerce.Core.Application.CommandHandlers.ProductHandlers;
 using ECommerce.Core.DataAccess;
@@ -14,6 +15,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using ECommerce.Infrastructure.API.Extensions;
+using ECommerce.Infrastructure.API.Middlewares;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
 
 namespace ECommerce.Web.API
 {
@@ -55,6 +60,13 @@ namespace ECommerce.Web.API
                 options.UseLazyLoadingProxies();
             });
 
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly(), typeof(ProductProfile).Assembly);
 
             services.AddRepositories();
@@ -63,7 +75,6 @@ namespace ECommerce.Web.API
             services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateProductHandler).Assembly);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
@@ -73,10 +84,20 @@ namespace ECommerce.Web.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ECommerce.Web.API v1"));
             }
+            else
+            {
+                app.UseErrorHandling();
+            }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
             app.UseCors(x => x
                 .AllowAnyMethod()
@@ -88,9 +109,6 @@ namespace ECommerce.Web.API
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-            app.ApplicationServices.GetRequiredService<ICurrentUserProvider>();
-
         }
     }
 }

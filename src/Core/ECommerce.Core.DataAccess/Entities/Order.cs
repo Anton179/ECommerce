@@ -1,18 +1,20 @@
-﻿using System;
+﻿using ECommerce.Core.DataAccess.Auth;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Auth;
+using ECommerce.Core.DataAccess.Enums;
 
 namespace ECommerce.Core.DataAccess.Entities
 {
     public class Order : BaseEntity
     {
         public Guid? UserId { get; set; }
-        public Guid? ProductId { get; set; }
+        public Guid ShippingId { get; set; }
+        public decimal DeliveryPrice { get; set; }
+        public OrderStatus Status { get; set; }
+        public PaymentType Payment { get; set; }
+        public string Address { get; set; }
+        public virtual Shipping Shipping { get; set; }
         public virtual User User { get; set; }
-        public virtual Product Product { get; set; }
-        public double Price { get; set; }
+        public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }
 }

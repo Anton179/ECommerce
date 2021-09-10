@@ -4,14 +4,16 @@ using ECommerce.Core.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Core.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906073113_AddedOrderProductsTable")]
+    partial class AddedOrderProductsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,25 +374,16 @@ namespace ECommerce.Core.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("DeliveryPrice")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Payment")
-                        .HasColumnType("int");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<Guid>("ShippingId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -402,8 +395,6 @@ namespace ECommerce.Core.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShippingId");
 
                     b.HasIndex("UserId");
 
@@ -421,9 +412,6 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -501,42 +489,6 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Shipping", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Estimated")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shippings");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicDateType", b =>
@@ -690,18 +642,10 @@ namespace ECommerce.Core.DataAccess.Migrations
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Order", b =>
                 {
-                    b.HasOne("ECommerce.Core.DataAccess.Entities.Shipping", "Shipping")
-                        .WithMany("Orders")
-                        .HasForeignKey("ShippingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ECommerce.Core.DataAccess.Auth.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Shipping");
 
                     b.Navigation("User");
                 });
@@ -778,11 +722,6 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.Navigation("Characteristics");
 
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Shipping", b =>
-                {
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
