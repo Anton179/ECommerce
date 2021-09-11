@@ -44,7 +44,7 @@ namespace ECommerce.Core.DataAccess
             modelBuilder.Entity<User>().ToTable("Users", IdentitySchemas.Auth);
             modelBuilder.Entity<UserClaim>().ToTable("UserClaims", IdentitySchemas.Auth);
             modelBuilder.Entity<UserLogin>().ToTable("UserLogins", IdentitySchemas.Auth);
-            modelBuilder.Entity<UserToken>().ToTable("UserRoles", IdentitySchemas.Auth);
+            modelBuilder.Entity<UserToken>().ToTable("UserTokens", IdentitySchemas.Auth);
             modelBuilder.Entity<Role>().ToTable("Roles", IdentitySchemas.Auth);
             modelBuilder.Entity<RoleClaim>().ToTable("RoleClaims", IdentitySchemas.Auth);
             modelBuilder.Entity<UserRole>().ToTable("UserRole", IdentitySchemas.Auth);

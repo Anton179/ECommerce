@@ -31,6 +31,7 @@ namespace ECommerce.Core.DataAccess.Repository
 
         public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
             await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+        //await _context.Set<TEntity>().FindAsync(id, cancellationToken);
 
         public async Task<List<TEntity>> ListAsync(CancellationToken cancellationToken = default) =>
             await _context.Set<TEntity>().ToListAsync(cancellationToken);
