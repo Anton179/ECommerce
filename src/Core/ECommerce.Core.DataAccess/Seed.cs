@@ -36,12 +36,12 @@ namespace ECommerce.Core.DataAccess
                 {
                     var user = new User
                     {
-                        UserName = "admin",
-                        Email = "anichitenco@gmail.com",
+                        UserName = "Admin",
+                        Email = "admin@gmail.com",
                         EmailConfirmed = true,
                     };
 
-                    var result = await userManager.CreateAsync(user, "admin");
+                    var result = await userManager.CreateAsync(user, "12345test");
                     if (result.Succeeded)
                     {
                         await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
@@ -157,6 +157,10 @@ namespace ECommerce.Core.DataAccess
                 {
                     Name = "profile"
                 },
+                new ApiScope
+                {
+                    Name = "roles"
+                }
             });
         }
 
@@ -186,6 +190,7 @@ namespace ECommerce.Core.DataAccess
                 RequireClientSecret = true,
                 AlwaysIncludeUserClaimsInIdToken = true,
                 AllowAccessTokensViaBrowser = true,
+                UpdateAccessTokenClaimsOnRefresh = true,
                 AllowedScopes = new List<ClientScope>
                 {
                     new ClientScope
@@ -216,6 +221,10 @@ namespace ECommerce.Core.DataAccess
                     new ClientScope
                     {
                         Scope = "profile"
+                    },
+                    new ClientScope
+                    {
+                        Scope = "roles"
                     }
                 }
             };
@@ -278,9 +287,17 @@ namespace ECommerce.Core.DataAccess
                         {
                             Type = "email"
                         },
+                        new ApiResourceClaim()
+                        {
+                            Type = JwtClaimTypes.Role
+                        }
                     },
                     Scopes = new List<ApiResourceScope>
                     {
+                        new ApiResourceScope
+                        {
+                            Scope = "roles"
+                        },
                         new ApiResourceScope
                         {
                             Scope = "profile"
@@ -344,6 +361,18 @@ namespace ECommerce.Core.DataAccess
                         }
                     },
                     DisplayName = "Your user identifier"
+                },
+                new IdentityResource
+                {
+                    Name = "roles",
+                    DisplayName = "Roles",
+                    UserClaims = new List<IdentityResourceClaim>
+                    {
+                        new IdentityResourceClaim()
+                        {
+                            Type = JwtClaimTypes.Role
+                        }
+                    }
                 }
             };
 

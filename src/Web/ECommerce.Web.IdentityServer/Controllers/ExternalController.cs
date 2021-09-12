@@ -72,44 +72,12 @@ namespace ECommerce.Web.IdentityServer.Controllers
                 RedirectUri = Url.Action(nameof(Callback)), 
                 Items =
                 {
-                    // { "returnUrl", $"/external/ensureCreatedUser?returnUrl={returnUrl}" }, 
                     { "returnUrl", returnUrl }, 
                     { "scheme", scheme },
                 }
             };
 
             return Challenge(props, scheme);
-        }
-
-        /// <summary>
-        /// Ensure created user
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> EnsureCreatedUser(string returnUrl)
-        {
-            if (User == null || !User.Identity.IsAuthenticated)
-            {
-                return NotFound();
-            }
-            
-            var user = await _userManager.FindByIdAsync(User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value);
-
-            if (user == null)
-            {
-                var claims = User.Claims;
-                var names = claims.FirstOrDefault(x => x.Type == "name")?.Value?.Split(" ", 2);
-                await _userManager.CreateAsync(new User
-                {
-                    Id = new Guid(User.Claims.FirstOrDefault(x => x.Type == "sub").Value),
-                    UserName = User.Claims.FirstOrDefault(x => x.Type == "Username")?.Value,
-                    FirstName = names?[0],
-                    LastName = names?[1],
-                    IsActive = true,
-                    EmailConfirmed = true
-                });
-            }
-            
-            return Redirect(returnUrl);
         }
 
         /// <summary>
@@ -130,15 +98,27 @@ namespace ECommerce.Web.IdentityServer.Controllers
                 var externalClaims = result.Principal.Claims.Select(c => $"{c.Type}: {c.Value}");
                 _logger.LogDebug("External claims: {@claims}", externalClaims);
             }
-
+            
             // lookup our user and external provider info
-            var (user, provider, providerUserId, claims) = FindUserFromExternalProvider(result);
+            var (user, provider, providerUserId, claims) = await FindUserFromExternalProvider(result);
             if (user == null)
             {
                 // this might be where you might initiate a custom workflow for user registration
                 // in this sample we don't show how that would be done, as our sample implementation
                 // simply auto-provisions new external user
-                user = AutoProvisionUser(provider, providerUserId, claims);
+                user = AutoProvisionUser(claims);
+
+                if (provider != "Google")
+                {
+                    throw new Exception("Unsupported external provider");
+                }
+
+                await _userManager.CreateAsync(user);
+                
+                await _userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
+                await _userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
+                await _userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                await _userManager.AddToRoleAsync(user, "user");
             }
 
             // this allows us to collect any additional claims or properties
@@ -149,14 +129,14 @@ namespace ECommerce.Web.IdentityServer.Controllers
             ProcessLoginCallback(result, additionalLocalClaims, localSignInProps);
             
             // issue authentication cookie for user
-            var isuser = new IdentityServerUser(user.SubjectId)
+            var issuer = new IdentityServerUser(user.Id.ToString())
             {
-                DisplayName = user.Username,
+                DisplayName = user.UserName,
                 IdentityProvider = provider,
                 AdditionalClaims = additionalLocalClaims
             };
 
-            await HttpContext.SignInAsync(isuser, localSignInProps);
+            await HttpContext.SignInAsync(issuer, localSignInProps);
 
             // delete temporary cookie used during external authentication
             await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
@@ -166,7 +146,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
 
             // check if external login is in the context of an OIDC request
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.SubjectId, user.Username, true, context?.Client.ClientId));
+            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id.ToString(), user.UserName, true, context?.Client.ClientId));
 
             if (context != null)
             {
@@ -181,33 +161,42 @@ namespace ECommerce.Web.IdentityServer.Controllers
             return Redirect(returnUrl);
         }
 
-        private (TestUser user, string provider, string providerUserId, IEnumerable<Claim> claims) FindUserFromExternalProvider(AuthenticateResult result)
+        private async Task<(User user, string provider, string providerUserId, IEnumerable<Claim> claims)> FindUserFromExternalProvider(AuthenticateResult result)
         {
             var externalUser = result.Principal;
 
             // try to determine the unique id of the external user (issued by the provider)
             // the most common claim type for that are the sub claim and the NameIdentifier
             // depending on the external provider, some other claim type might be used
-            var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
-                              externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
-                              throw new Exception("Unknown userid");
+            var userEmailClaim = externalUser.FindFirst(ClaimTypes.Email) ??
+                              throw new Exception("Unknown email");
+            
+            var providerUserId = externalUser.FindFirst(ClaimTypes.NameIdentifier)?.Value ??
+                                          throw new Exception("Unknown email");
 
             // remove the user id claim so we don't include it as an extra claim if/when we provision the user
             var claims = externalUser.Claims.ToList();
-            claims.Remove(userIdClaim);
 
             var provider = result.Properties.Items["scheme"];
-            var providerUserId = userIdClaim.Value;
 
             // find external user
-            var user = _users.FindByExternalProvider(provider, providerUserId);
+            var user = await _userManager.FindByEmailAsync(userEmailClaim.Value);
 
             return (user, provider, providerUserId, claims);
         }
 
-        private TestUser AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
+        private User AutoProvisionUser(IEnumerable<Claim> claims)
         {
-            var user = _users.AutoProvisionUser(provider, providerUserId, claims.ToList());
+            var user = new User()
+            {
+                UserName = claims.First(x => x.Type == ClaimTypes.Email).Value.Split("@", 2).First(),
+                Email = claims.First(x => x.Type == ClaimTypes.Email).Value,
+                EmailConfirmed = true,
+                FirstName = claims.First(x => x.Type == ClaimTypes.GivenName).Value,
+                LastName = claims.First(x => x.Type == ClaimTypes.Surname).Value,
+                IsActive = true
+            };
+            
             return user;
         }
 

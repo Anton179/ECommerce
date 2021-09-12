@@ -1,6 +1,7 @@
 using System.Reflection;
 using ECommerce.Core.DataAccess;
 using ECommerce.Core.DataAccess.Auth;
+using ECommerce.Infrastructure.API.Factories;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +49,8 @@ namespace ECommerce.Web.IdentityServer
                 .AddEntityFrameworkStores<ECommerceDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<IUserClaimsPrincipalFactory<User>, ClaimsFactory>();
+            
             services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -73,8 +76,15 @@ namespace ECommerce.Web.IdentityServer
                     builder.DefaultSchema = "is4";
                 })
                 .AddAspNetIdentity<User>();
+            
+            services.AddAuthentication()
+                .AddGoogle("Google", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-            services.AddAuthentication();
+                    options.ClientId = "865160400299-c9avcii9hm0mknksq96ou0aeulvj9thn.apps.googleusercontent.com";
+                    options.ClientSecret = "vEG90kTIwW3XF6kLgLjVKHKS";
+                });
 
             services.AddCors();
         }

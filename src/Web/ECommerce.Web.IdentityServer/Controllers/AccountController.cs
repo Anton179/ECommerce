@@ -224,8 +224,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
 
-            return Redirect(vm.PostLogoutRedirectUri);
-            //return View("LoggedOut", vm);
+            return View("LoggedOut", vm);
         }
 
         [HttpGet]
@@ -336,8 +335,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
             var vm = new LoggedOutViewModel
             {
                 AutomaticRedirectAfterSignOut = AccountOptions.AutomaticRedirectAfterSignOut,
-                //PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
-                PostLogoutRedirectUri = "http://localhost:4200/auth/signout-callback",
+                PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
                 ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
                 SignOutIframeUrl = logout?.SignOutIFrameUrl,
                 LogoutId = logoutId

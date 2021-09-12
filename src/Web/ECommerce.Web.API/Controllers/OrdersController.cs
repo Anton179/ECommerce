@@ -23,8 +23,7 @@ namespace ECommerce.Web.API.Controllers
             _mediator = mediator;
         }
 
-        //[Authorize(Roles = "user")]
-        [Authorize]
+        [Authorize(Roles = "user")]
         [HttpPost("create")]
         public async Task<ActionResult<Guid>> CreateOrder([FromBody] CreateOrderCommand request, CancellationToken cancellationToken)
         {
@@ -33,7 +32,7 @@ namespace ECommerce.Web.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "user")]
         [HttpGet("get/{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder([FromRoute] Guid id, CancellationToken cancellationToken)
         {
