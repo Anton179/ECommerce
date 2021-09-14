@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos;
-using ECommerce.Core.DataAccess.Dtos.ProductDtos;
-using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
 using MediatR;
 
 namespace ECommerce.Core.Application.Commands.ProductCommands
 {
-    public class CreateProductCommand : IRequest<Guid>
+    public class UpdateProductCommand : IRequest<Guid>
     {
         [Required]
+        public Guid? Id { get; set; }
         [StringLength(254)]
-        public string Name { get; set; }
         [Required]
+        public string Name { get; set; }
         [StringLength(254)]
+        [Required]
         public string Description { get; set; }
         [Range(1, 4999)]
         public decimal Price { get; set; }
@@ -24,8 +26,8 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         [Required]
         public string ImageUrl { get; set; }
         [Required]
+        public bool? InStock { get; set; }
         public Guid? CategoryId { get; set; }
-        [Required]
-        public virtual ICollection<CharacteristicValueDto> CharacteristicsValue { get; set; }
+        public virtual ICollection<CharacteristicValueDto> Characteristics { get; set; }
     }
 }

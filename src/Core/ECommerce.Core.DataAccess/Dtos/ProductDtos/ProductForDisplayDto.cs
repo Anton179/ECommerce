@@ -13,5 +13,6 @@ namespace ECommerce.Core.DataAccess.Dtos.ProductDtos
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public double Weight { get; set; }
+        public bool InStock { get; set; }
     }
 }

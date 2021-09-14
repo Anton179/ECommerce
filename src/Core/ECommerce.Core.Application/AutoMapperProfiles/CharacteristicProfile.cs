@@ -39,6 +39,21 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
                 .ForMember(ch => ch.Type, exp => exp.MapFrom(ch => typeof(DateTime)))
                 .ForMember(ch => ch.Value, exp => exp.MapFrom(ch => ch.ValueDate.ToString("yyyy-MM-dd")));
 
+            CreateMap<CharacteristicValueDto, CharacteristicValue>()
+                .IncludeAllDerived();
+
+            CreateMap<CharacteristicValueDto, CharacteristicDecimalType>()
+                .ForMember(ch => ch.ValueDec, source => source.MapFrom(ch => ch.Value));
+
+            CreateMap<CharacteristicValueDto, CharacteristicStringType>()
+                .ForMember(ch => ch.ValueStr, source => source.MapFrom(ch => ch.Value));
+            
+            CreateMap<CharacteristicValueDto, CharacteristicIntType>()
+                .ForMember(ch => ch.ValueInt, source => source.MapFrom(ch => ch.Value));
+           
+            CreateMap<CharacteristicValueDto, CharacteristicDateType>()
+                .ForMember(ch => ch.ValueDate, source => source.MapFrom(ch => ch.Value));
+
             CreateMap<Characteristic, CharacteristicDto>();
         }
     }

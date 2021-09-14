@@ -18,6 +18,12 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
                 .WithMany(u => u.Orders)
                 .HasForeignKey(o => o.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(o => o.CreatedDate)
+                .HasColumnType("date");
+            
+            builder.Property(o => o.UpdatedDate)
+                .HasColumnType("date");
         }
     }
 }

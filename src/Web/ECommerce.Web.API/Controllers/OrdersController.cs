@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.OrderCommands;
 using ECommerce.Core.Application.Queries.Orders;
 using ECommerce.Core.DataAccess.Dtos.OrderDtos;
+using ECommerce.Infrastructure.API.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 
@@ -34,6 +35,7 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize(Roles = "user")]
         [HttpGet("get/{id}")]
+        [ApiExceptionFilter]
         public async Task<ActionResult<OrderDto>> GetOrder([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetOrderQuery() {Id = id}, cancellationToken);

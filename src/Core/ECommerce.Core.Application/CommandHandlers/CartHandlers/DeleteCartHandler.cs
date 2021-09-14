@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.CartCommands;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
+using ECommerce.Infrastructure.API.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,11 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             var userId = _currentUserProvider.GetUserId();
 
             var cart = await _cartRepository.Read().Where(c => c.UserId == userId && c.ProductId == request.ProductId).FirstOrDefaultAsync(cancellationToken);
+
+            if (cart == null)
+            {
+                throw new NotFoundException("The product does not exist in cart");
+            }
 
             _cartRepository.Delete(cart);
             await _cartRepository.SaveChangesAsync();

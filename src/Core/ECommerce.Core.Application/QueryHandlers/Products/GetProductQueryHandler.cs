@@ -11,6 +11,7 @@ using ECommerce.Core.DataAccess.Dtos.ProductDtos;
 using ECommerce.Core.DataAccess.Dtos.UserDtos;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
+using ECommerce.Infrastructure.API.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,11 @@ namespace ECommerce.Core.Application.QueryHandlers.Products
         public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
+
+            if (product == null)
+            {
+                throw new NotFoundException("The product doesn't exist!");
+            }
 
             var result = _mapper.Map<ProductDto>(product);
 

@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\ECommerce.Core.Application\ECommerce.Core.Application.csproj" />
     <ProjectReference Include="..\..\Core\ECommerce.Core.DataAccess\ECommerce.Core.DataAccess.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ECommerce.Infrastructure.API\ECommerce.Infrastructure.API.csproj" />
   </ItemGroup>

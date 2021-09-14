@@ -49,7 +49,9 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
                 Status = OrderStatus.Pending,
                 Payment = request.Payment,
                 OrderProducts = orderProducts,
-                Address = request.Address
+                Address = request.Address,
+                CreatedDate = DateTime.Today,
+                UpdatedDate = DateTime.Today
             };
 
             await _orderRepository.AddAsync(order, cancellationToken);

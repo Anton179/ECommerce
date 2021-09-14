@@ -530,7 +530,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiMiNote10.png",
                 },
                 new Product()
                 {
@@ -540,7 +540,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiMi10Pro.png",
                     InStock = false
                 },
                 new Product()
@@ -551,7 +551,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/iPhone12.png",
                     InStock = false
                 },
                 new Product()
@@ -562,7 +562,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/iPhone11.png",
                 },
                 new Product()
                 {
@@ -572,7 +572,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/iPhoneX.png",
                     InStock = false
                 },
                 new Product()
@@ -583,7 +583,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiMi10.png",
                 },
                 new Product()
                 {
@@ -593,7 +593,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiMi11.png",
                 },
                 new Product()
                 {
@@ -603,7 +603,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiMi11Ultra.png",
                 },
                 new Product()
                 {
@@ -613,7 +613,7 @@ namespace ECommerce.Core.DataAccess
                     Category = mobilePhonesCat,
                     Price = 450,
                     Weight = 1.2,
-                    ImageUrl = "assets/img/Products/Smartphone.png",
+                    ImageUrl = "assets/img/Products/XiaomiRedmiNote9Pro.png",
                 },
             };
 

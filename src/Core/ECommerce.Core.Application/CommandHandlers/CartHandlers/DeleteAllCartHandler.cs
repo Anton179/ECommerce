@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.CartCommands;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
+using ECommerce.Infrastructure.API.Exceptions;
 using MediatR;
 
 namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
@@ -32,7 +33,6 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             await _cartRepository.SaveChangesAsync();
 
             return userId;
-
         }
     }
 }

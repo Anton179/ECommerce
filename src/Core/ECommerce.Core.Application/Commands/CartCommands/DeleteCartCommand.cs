@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Core.Application.Commands.CartCommands
 {
-    public class DeleteCartCommand : BaseCreateUpdateDeleteCartCommand
+    public class DeleteCartCommand : IRequest<Guid>
     {
+        [Required]
+        public Guid? ProductId { get; set; }
     }
 }

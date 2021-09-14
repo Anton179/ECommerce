@@ -39,8 +39,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
             builder.HasMany(p => p.Characteristics)
                 .WithOne(ch => ch.Product)
                 .HasForeignKey(ch => ch.ProductId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired();
         }
     }
 }

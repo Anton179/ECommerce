@@ -9,6 +9,7 @@ using ECommerce.Core.Application.Queries.Orders;
 using ECommerce.Core.DataAccess.Dtos.OrderDtos;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
+using ECommerce.Infrastructure.API.Exceptions;
 using MediatR;
 
 namespace ECommerce.Core.Application.QueryHandlers.Orders
@@ -34,7 +35,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
 
             if (order == null || order.UserId != userId)
             {
-                return null;
+                throw new NotFoundException("Order not found!");
             }
 
             var result = _mapper.Map<OrderDto>(order);

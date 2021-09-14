@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ECommerce.Core.Application.Queries.CartQueries;
+using ECommerce.Infrastructure.API.Attributes;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -53,13 +54,14 @@ namespace ECommerce.Web.API.Controllers
         [HttpDelete("removeAll")]
         public async Task<ActionResult> RemoveAllByCurrentUser(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new DeleteAllCartCommand(), cancellationToken);
+            await _mediator.Send(new DeleteAllCartCommand(), cancellationToken);
 
-            return Ok(result);
+            return NoContent();
         }
 
         [Authorize]
         [HttpDelete("remove/{productId}")]
+        [ApiExceptionFilter]
         public async Task<ActionResult> RemoveByCurrentUser([FromRoute] Guid productId, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new DeleteCartCommand() { ProductId = productId }, cancellationToken);
