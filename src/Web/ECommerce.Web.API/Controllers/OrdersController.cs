@@ -26,9 +26,9 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize(Roles = "user")]
         [HttpPost("create")]
-        public async Task<ActionResult<Guid>> CreateOrder([FromBody] CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<Guid>> CreateOrder([FromBody] CreateOrderCommand request)
         {
-            var result = await _mediator.Send(request, cancellationToken);
+            var result = await _mediator.Send(request);
 
             return Ok(result);
         }

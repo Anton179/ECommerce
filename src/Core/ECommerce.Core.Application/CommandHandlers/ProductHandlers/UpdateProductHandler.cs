@@ -22,9 +22,9 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             _mediator = mediator;
             _currentUserProvider = currentUserProvider;
         }
-        public async Task<Guid> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(UpdateProductCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var product = await _productRepository.GetByIdAsync((Guid)request.Id, cancellationToken);
+            var product = await _productRepository.GetByIdAsync((Guid)request.Id);
             var vendorId = _currentUserProvider.GetUserId();
 
             if (product == null || product.OwnerId != vendorId)

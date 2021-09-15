@@ -26,7 +26,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Categories
         }
 
         public async Task<IEnumerable<CategoryWithImageDto>> Handle(GetMainCategoriesQuery request,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var mainCategories = await _repository.Read().Where(c => c.Parent == null && !String.IsNullOrEmpty(c.Image)).ToListAsync(cancellationToken);
 

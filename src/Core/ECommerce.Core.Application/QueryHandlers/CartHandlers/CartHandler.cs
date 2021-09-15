@@ -27,7 +27,7 @@ namespace ECommerce.Core.Application.QueryHandlers.CartHandlers
             _currentUserProvider = currentUserProvider;
         }
 
-        public async Task<IEnumerable<CartDto>> Handle(CartQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CartDto>> Handle(CartQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var userId = _currentUserProvider.GetUserId();
 

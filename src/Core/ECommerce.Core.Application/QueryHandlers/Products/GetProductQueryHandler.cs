@@ -28,7 +28,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Products
             _productRepository = productRepository;
             _mapper = mapper;
         }
-        public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
 

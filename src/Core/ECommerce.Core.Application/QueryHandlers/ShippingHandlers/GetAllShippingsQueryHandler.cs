@@ -22,7 +22,7 @@ namespace ECommerce.Core.Application.QueryHandlers.ShippingHandlers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ShippingDto>> Handle(GetAllShippingsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ShippingDto>> Handle(GetAllShippingsQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var shippings = await _repository.ListAsync(cancellationToken);
 

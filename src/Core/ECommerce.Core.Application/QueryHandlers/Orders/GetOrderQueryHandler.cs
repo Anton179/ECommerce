@@ -27,7 +27,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
             this._currentUserProvider = _currentUserProvider;
             _mapper = mapper;
         }
-        public async Task<OrderDto> Handle(GetOrderQuery request, CancellationToken cancellationToken)
+        public async Task<OrderDto> Handle(GetOrderQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var order = await _orderRepository.GetByIdAsync(request.Id, cancellationToken);
 

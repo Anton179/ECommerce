@@ -28,7 +28,7 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             _characteristicValueRepository = characteristicValueRepository;
         }
 
-        public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var product = _mapper.Map<Product>(request);
             var characteristicsValueList = new List<CharacteristicValue>();
@@ -67,8 +67,8 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             product.OwnerId = _currentUserProvider.GetUserId();
             product.Characteristics = characteristicsValueList;
 
-            await _productRepository.AddAsync(product, cancellationToken);
-            await _characteristicValueRepository.AddRangeAsync(characteristicsValueList, cancellationToken);
+            await _productRepository.AddAsync(product);
+            await _characteristicValueRepository.AddRangeAsync(characteristicsValueList);
 
             await _productRepository.SaveChangesAsync();
             await _characteristicValueRepository.SaveChangesAsync();

@@ -23,13 +23,13 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             _currentUserProvider = currentUserProvider;
             _cartRepository = genericRepository;
         }
-        public async Task<Guid> Handle(CreateCartCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateCartCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var cart = _mapper.Map<Cart>(request);
 
             cart.UserId = _currentUserProvider.GetUserId();
 
-            var product = await _cartRepository.Read().FirstOrDefaultAsync(c => c.UserId == cart.UserId && c.ProductId == cart.ProductId, cancellationToken);
+            var product = await _cartRepository.Read().FirstOrDefaultAsync(c => c.UserId == cart.UserId && c.ProductId == cart.ProductId);
 
             if (product != null)
             {
@@ -38,7 +38,7 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             }
             else
             {
-                await _cartRepository.AddAsync(cart, cancellationToken);
+                await _cartRepository.AddAsync(cart);
 
             }
             await _cartRepository.SaveChangesAsync();

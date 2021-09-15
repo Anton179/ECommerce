@@ -25,9 +25,9 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize]
         [HttpPost("add")]
-        public async Task<ActionResult<Guid>> AddToCart([FromBody] CreateCartCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<Guid>> AddToCart([FromBody] CreateCartCommand request)
         {
-            var result = await _mediator.Send(request, cancellationToken);
+            var result = await _mediator.Send(request);
 
             return Ok(result);
         }
@@ -52,9 +52,9 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize]
         [HttpDelete("removeAll")]
-        public async Task<ActionResult> RemoveAllByCurrentUser(CancellationToken cancellationToken)
+        public async Task<ActionResult> RemoveAllByCurrentUser()
         {
-            await _mediator.Send(new DeleteAllCartCommand(), cancellationToken);
+            await _mediator.Send(new DeleteAllCartCommand());
 
             return NoContent();
         }
@@ -62,9 +62,9 @@ namespace ECommerce.Web.API.Controllers
         [Authorize]
         [HttpDelete("remove/{productId}")]
         [ApiExceptionFilter]
-        public async Task<ActionResult> RemoveByCurrentUser([FromRoute] Guid productId, CancellationToken cancellationToken)
+        public async Task<ActionResult> RemoveByProductId([FromRoute] Guid productId)
         {
-            var result = await _mediator.Send(new DeleteCartCommand() { ProductId = productId }, cancellationToken);
+            var result = await _mediator.Send(new DeleteCartCommand() { ProductId = productId });
 
             return Ok(result);
         }

@@ -22,7 +22,7 @@ namespace ECommerce.Core.Application.QueryHandlers.CartHandlers
             _currentUserProvider = currentUserProvider;
             _cartRepository = cartRepository;
         }
-        public async Task<int> Handle(NumberOfProductsInCartQuery request, CancellationToken cancellationToken)
+        public async Task<int> Handle(NumberOfProductsInCartQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var userId = _currentUserProvider.GetUserId();
 

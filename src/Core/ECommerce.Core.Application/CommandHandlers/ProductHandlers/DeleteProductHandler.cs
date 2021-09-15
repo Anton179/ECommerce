@@ -23,9 +23,9 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             _productRepository = productRepository;
             _currentUserProvider = currentUserProvider;
         }
-        public async Task<Guid> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteProductCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
+            var product = await _productRepository.GetByIdAsync(request.Id);
             var userId = _currentUserProvider.GetUserId();
 
             if (product == null || product.OwnerId != userId)

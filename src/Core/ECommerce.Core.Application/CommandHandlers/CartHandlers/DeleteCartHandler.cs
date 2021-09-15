@@ -24,11 +24,11 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             _cartRepository = cartRepository;
         }
 
-        public async Task<Guid> Handle(DeleteCartCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteCartCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var userId = _currentUserProvider.GetUserId();
 
-            var cart = await _cartRepository.Read().Where(c => c.UserId == userId && c.ProductId == request.ProductId).FirstOrDefaultAsync(cancellationToken);
+            var cart = await _cartRepository.Read().Where(c => c.UserId == userId && c.ProductId == request.ProductId).FirstOrDefaultAsync();
 
             if (cart == null)
             {

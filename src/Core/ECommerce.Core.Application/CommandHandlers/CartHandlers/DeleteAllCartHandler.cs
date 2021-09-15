@@ -23,7 +23,7 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
             _cartRepository = cartRepository;
         }
 
-        public async Task<Guid> Handle(DeleteAllCartCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteAllCartCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var userId = _currentUserProvider.GetUserId();
 

@@ -8,5 +8,11 @@ namespace ECommerce.Core.DataAccess.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
+
+        protected BaseEntity()
+        {
+            this.CreatedDate = DateTime.Today;
+            this.UpdatedDate = DateTime.Today;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 
 namespace ECommerce.Core.DataAccess.Interfaces
 {
@@ -19,5 +20,6 @@ namespace ECommerce.Core.DataAccess.Interfaces
         void DeleteRange(IEnumerable<TEntity> entities);
         IQueryable<TEntity> Read();
         Task<int> SaveChangesAsync();
+        Task<PaginatedResult<TDto>> GetPagedData<TDto>(PagedRequest pagedRequest) where TDto : class;
     }
 }

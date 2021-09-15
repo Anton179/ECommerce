@@ -33,11 +33,11 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
             _cartRepository = cartRepository;
         }
 
-        public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var userId = _currentUserProvider.GetUserId();
 
-            var carts = await _cartRepository.Read().Where(c => c.UserId == userId).ToListAsync(cancellationToken);
+            var carts = await _cartRepository.Read().Where(c => c.UserId == userId).ToListAsync();
 
             var orderProducts = _mapper.Map<ICollection<OrderProducts>>(carts);
 
@@ -54,8 +54,8 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
                 UpdatedDate = DateTime.Today
             };
 
-            await _orderRepository.AddAsync(order, cancellationToken);
-            await _orderProductsRepository.AddRangeAsync(orderProducts, cancellationToken);
+            await _orderRepository.AddAsync(order);
+            await _orderProductsRepository.AddRangeAsync(orderProducts);
 
             await _orderRepository.SaveChangesAsync();
             await _orderProductsRepository.SaveChangesAsync();
