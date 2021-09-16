@@ -89,6 +89,42 @@ namespace ECommerce.Core.DataAccess
                 {
                     var user = new User
                     {
+                        Id = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                        UserName = "Microsoft",
+                        Email = "Microsoft@gmail.com",
+                        EmailConfirmed = true,
+                    };
+
+                    var result = await userManager.CreateAsync(user, "12345test");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
+                        await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
+                        await userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                        await userManager.AddToRoleAsync(user, "vendor");
+                    }
+                }
+                {
+                    var user = new User
+                    {
+                        Id = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                        UserName = "Sony",
+                        Email = "Sony@gmail.com",
+                        EmailConfirmed = true,
+                    };
+
+                    var result = await userManager.CreateAsync(user, "12345test");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
+                        await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
+                        await userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                        await userManager.AddToRoleAsync(user, "vendor");
+                    }
+                }
+                {
+                    var user = new User
+                    {
                         Id = new Guid("DE0821F1-6819-49E8-A823-B4B1A19BAEAD"),
                         UserName = "Jenea228",
                         Email = "jenea228@gmail.com",
@@ -386,7 +422,14 @@ namespace ECommerce.Core.DataAccess
                 await SeedResources(eCommerceDbContext);
             }
 
-            await eCommerceDbContext.SaveChangesAsync();
+            try{
+                await eCommerceDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
         }
 
         private static async Task SeedResources(ECommerceDbContext eCommerceDbContext)
@@ -512,13 +555,14 @@ namespace ECommerce.Core.DataAccess
                 categories.AddRange(new List<Category>()
                 {
                     other, musicalInstruments, clothes, fishing, autoAccessories, homeAndGarden, sports, electronics, phones, mobilePhones, homePhones,
-                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans
+                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans, consoles
                 });
             }
 
 
 
             var mobilePhonesCat = categories.FirstOrDefault(c => c.Name == "Mobile Phones");
+            var consolesCat = categories.FirstOrDefault(x => x.Name == "Consoles");
 
             var products = new List<Product>()
             {
@@ -615,6 +659,81 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     ImageUrl = "assets/img/Products/XiaomiRedmiNote9Pro.png",
                 },
+
+                // ----------------------------------
+                
+                new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "Play Station 4 pro",
+                    Description = "The most advanced PlayStation system ever. PS4 Pro is designed to take your favorite PS4 games and add to them with more power for graphics, performance, or features for your 4K HDR TV, or 1080p HD TV.",
+                    Category = consolesCat,
+                    Price = 348,
+                    Weight = 4.8,
+                    ImageUrl = "assets/img/Products/PS4Pro.png",
+                },
+                new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "Play Station 4",
+                    Description = "Enables the greatest game developers in the world to unlock their creativity and push the boundaries of play through a platform that is tuned specifically to their needs. Engage in endless personal challenges between you and your community, and share your epic moments for the world to see.",
+                    Category = consolesCat,
+                    Price = 270,
+                    Weight = 4.1,
+                    ImageUrl = "assets/img/Products/PS4.png",
+                },
+                new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "Play Station 4 Slim",
+                    Description = "PlayStation 4 is the best place to play with dynamic, connected gaming, powerful graphics and speed, intelligent personalization, deeply integrated social capabilities, and innovative second-screen features.",
+                    Category = consolesCat,
+                    Price = 240,
+                    Weight = 3.2,
+                    ImageUrl = "assets/img/Products/PS4Slim.png",
+                },
+
+                new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Series S",
+                    Description = "The next generation of gaming brings our largest digital launch library yet to our smallest Xbox ever. With more dynamic worlds, faster load times, and the addition of Xbox Game Pass (sold separately), the all-digital Xbox Series S is the best value in gaming.",
+                    Category = consolesCat,
+                    Price = 497,
+                    Weight = 4.05,
+                    ImageUrl = "assets/img/Products/XboxSeriesS.png",
+                },
+                new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Series X",
+                    Description = "Introducing Xbox Series X, the fastest, most powerful Xbox ever. Play thousands of titles from four generations of consoles-all games look and play best on Xbox Series X.",
+                    Category = consolesCat,
+                    Price = 580,
+                    Weight = 5.8,
+                    ImageUrl = "assets/img/Products/XboxSeriesX.png",
+                },
+                new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox 360",
+                    Description = "The Official Xbox 360 500GB Hard Drive For Slim Console is the best option for media enthusiasts who game on Xbox 360. Expand your Xbox 360 experience with downloadable content. ",
+                    Category = consolesCat,
+                    Price = 71,
+                    Weight = 3.2,
+                    ImageUrl = "assets/img/Products/Xbox360.png",
+                },
+                new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox One S",
+                    Description = "Play over 100 console exclusives and a growing library of Xbox 360 games on the Xbox One S. Stream your favorite films and shows in stunning 4K Ultra HD.",
+                    Category = consolesCat,
+                    Price = 300,
+                    Weight = 2.72,
+                    ImageUrl = "assets/img/Products/XboxOneS.png",
+                },
+
             };
 
             var characteristics = new List<Characteristic>()
@@ -634,10 +753,117 @@ namespace ECommerce.Core.DataAccess
                     Name = "Released",
                     Category = categories.FirstOrDefault(c => c.Name == "Electronics")
                 },
+
+                new Characteristic()
+                {
+                    Name = "Memory",
+                    Category = consolesCat
+                },
+                new Characteristic()
+                {
+                    Name = "Storage size",
+                    Category = consolesCat
+                },
             };
 
             var characteristicsValues = new List<CharacteristicValue>()
             {
+                
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "8GB DDR3",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox One S")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "2048GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox One S")
+                },
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "10GB GDDR6",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox Series S")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "512GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox Series S")
+                },
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "16 GB GDDR6",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox Series X")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "1024GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox Series X")
+                },
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "GDDR5 8GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox 360")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "512GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Xbox 360")
+                },
+                // ----------------------------------
+                
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "GDDR5 8GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4 pro")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "1024GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4 pro")
+                },
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "GDDR5 8GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "1024GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4")
+                },
+                // ----------------------------------
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Memory"),
+                    ValueStr = "GDDR5 8GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4 Slim")
+                },
+                new CharacteristicStringType()
+                {
+                    Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Storage size"),
+                    ValueStr = "512GB",
+                    Product = products.FirstOrDefault(c => c.Name == "Play Station 4 Slim")
+                },
+                // ----------------------------------
+
                 new CharacteristicDecimalType()
                 {
                     Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Selfie camera"),

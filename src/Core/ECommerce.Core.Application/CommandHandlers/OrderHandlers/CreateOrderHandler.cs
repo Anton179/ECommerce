@@ -44,7 +44,7 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
             var order = new Order()
             {
                 ShippingId = request.Shipping.Id,
-                DeliveryPrice = request.Shipping.Price,
+                Price = orderProducts.Sum(p => p.Price * p.Quantity) + request.Shipping.Price,
                 UserId = userId,
                 Status = OrderStatus.Pending,
                 Payment = request.Payment,

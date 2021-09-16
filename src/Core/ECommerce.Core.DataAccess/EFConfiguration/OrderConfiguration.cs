@@ -8,7 +8,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.Property(o => o.DeliveryPrice)
+            builder.Property(o => o.Price)
                 .IsRequired();
 
             builder.Property(o => o.RowVersion)

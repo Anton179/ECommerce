@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.OrderCommands;
 using ECommerce.Core.Application.Queries.Orders;
 using ECommerce.Core.DataAccess.Dtos.OrderDtos;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using ECommerce.Infrastructure.API.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +40,16 @@ namespace ECommerce.Web.API.Controllers
         public async Task<ActionResult<OrderDto>> GetOrder([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetOrderQuery() {Id = id}, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<PaginatedResult<OrderDto>>> GetOrders([FromQuery] PagedRequest pagedRequest,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new GetOrdersQuery() { PagedRequest = pagedRequest }, cancellationToken);
 
             return Ok(result);
         }

@@ -22,9 +22,9 @@ namespace ECommerce.Core.DataAccess.Extensions
 
             query = query.Paginate(pagedRequest);
 
-            var projectionResult = query.ProjectTo<TDto>(mapper.ConfigurationProvider);
+            query = query.Sort(pagedRequest);
 
-            projectionResult = projectionResult.Sort(pagedRequest);
+            var projectionResult = query.ProjectTo<TDto>(mapper.ConfigurationProvider);
 
             var listResult = await projectionResult.ToListAsync();
 

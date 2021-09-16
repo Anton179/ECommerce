@@ -17,7 +17,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
 
             builder.Property(p => p.Description)
                 .IsRequired()
-                .HasMaxLength(255);
+                .HasMaxLength(500);
 
             builder.Property(p => p.Weight)
                 .IsRequired();

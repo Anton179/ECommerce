@@ -4,14 +4,16 @@ using ECommerce.Core.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Core.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210915152740_UpdatedProductDescriptionMaxLength")]
+    partial class UpdatedProductDescriptionMaxLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,11 +380,11 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("date");
 
+                    b.Property<decimal>("DeliveryPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Payment")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()

@@ -9,7 +9,7 @@ namespace ECommerce.Core.DataAccess.Entities
     {
         public Guid? UserId { get; set; }
         public Guid ShippingId { get; set; }
-        public decimal DeliveryPrice { get; set; }
+        public decimal Price { get; set; }
         public OrderStatus Status { get; set; }
         public PaymentType Payment { get; set; }
         public string Address { get; set; }
