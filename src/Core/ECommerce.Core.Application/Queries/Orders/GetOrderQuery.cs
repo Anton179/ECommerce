@@ -1,7 +1,6 @@
-﻿using System;
-using ECommerce.Core.DataAccess.Dtos.OrderDtos;
-using MediatR;
-using System.Collections.Generic;
+﻿using MediatR;
+using System;
+using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 
 namespace ECommerce.Core.Application.Queries.Orders
 {

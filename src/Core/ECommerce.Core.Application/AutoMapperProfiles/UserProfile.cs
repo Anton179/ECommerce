@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using ECommerce.Core.Application.Infrastructure.Dtos.UserDtos;
 using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Core.DataAccess.Dtos.UserDtos;
 
 namespace ECommerce.Core.Application.AutoMapperProfiles
 {

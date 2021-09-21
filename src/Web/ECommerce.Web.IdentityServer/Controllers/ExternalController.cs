@@ -16,7 +16,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Web.IdentityServer.Attributes;
-using ECommerce.Web.IdentityServer.Extensions;
+using ECommerce.Web.IdentityServer.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Web.IdentityServer.Controllers

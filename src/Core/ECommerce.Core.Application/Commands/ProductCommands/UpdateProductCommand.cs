@@ -1,11 +1,8 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Dtos.CharacteristicsDtos;
-using MediatR;
+using ECommerce.Core.Application.Infrastructure.Dtos.CharacteristicsDtos;
 
 namespace ECommerce.Core.Application.Commands.ProductCommands
 {
@@ -19,9 +16,9 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         [StringLength(254)]
         [Required]
         public string Description { get; set; }
-        [Range(1, 4999)]
+        [Range(1, double.MaxValue)]
         public decimal Price { get; set; }
-        [Range(0.1, 40)]
+        [Range(0.1, 5000)]
         public double Weight { get; set; }
         [Required]
         public string ImageUrl { get; set; }

@@ -4,8 +4,8 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.ViewModels.Diagnostics;
 using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.ViewModels.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

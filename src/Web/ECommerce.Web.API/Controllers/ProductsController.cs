@@ -1,14 +1,14 @@
 ﻿using ECommerce.Core.Application.Commands.ProductCommands;
 using ECommerce.Core.Application.Queries.Products;
-using ECommerce.Core.DataAccess.Dtos.ProductDtos;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Models.PagedRequestModels;
-using ECommerce.Infrastructure.API.Attributes;
+using ECommerce.Core.Application.Infrastructure.Dtos.ProductDtos;
+using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -24,8 +24,8 @@ namespace ECommerce.Web.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "vendor")]
-        [HttpPost("create")]
+        [Authorize(Roles = Roles.Vendor)]
+        [HttpPost]
         public async Task<ActionResult<Guid>> CreateProduct([FromBody] CreateProductCommand request)
         {
             var result = await _mediator.Send(request);
@@ -34,9 +34,8 @@ namespace ECommerce.Web.API.Controllers
             return CreatedAtAction(nameof(GetProductById), new { id = result }, request);
         }
 
-        [Authorize(Roles = "vendor")]
-        [HttpPut("update/{id}")]
-        [ApiExceptionFilter]
+        [Authorize(Roles = Roles.Vendor)]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Guid>> UpdateProduct(UpdateProductCommand request)
         {
             var result = await _mediator.Send(request);
@@ -46,7 +45,7 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<ProductForDisplayDto>>> GetProducts([FromQuery]GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<ActionResult<PaginatedResult<ProductForDisplayDto>>> GetProducts([FromQuery] GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(request, cancellationToken);
 
@@ -55,7 +54,6 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        [ApiExceptionFilter]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetProductQuery() { Id = id }, cancellationToken);
@@ -63,9 +61,8 @@ namespace ECommerce.Web.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "vendor")]
-        [HttpDelete("delete/{id}")]
-        [ApiExceptionFilter]
+        [Authorize(Roles = Roles.Vendor)]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Guid>> DeleteProductById([FromRoute] Guid id)
         {
             var result = await _mediator.Send(new DeleteProductCommand() { Id = id });

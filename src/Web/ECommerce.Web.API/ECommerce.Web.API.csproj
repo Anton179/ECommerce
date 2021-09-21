@@ -12,6 +12,7 @@
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.8" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
@@ -40,7 +41,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ECommerce.Core.Application\ECommerce.Core.Application.csproj" />
     <ProjectReference Include="..\..\Core\ECommerce.Core.DataAccess\ECommerce.Core.DataAccess.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\ECommerce.Infrastructure.API\ECommerce.Infrastructure.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>

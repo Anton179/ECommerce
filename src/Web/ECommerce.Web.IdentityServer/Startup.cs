@@ -1,7 +1,7 @@
 using System.Reflection;
 using ECommerce.Core.DataAccess;
 using ECommerce.Core.DataAccess.Auth;
-using ECommerce.Infrastructure.API.Factories;
+using ECommerce.Web.IdentityServer.Infrastructure.Factories;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

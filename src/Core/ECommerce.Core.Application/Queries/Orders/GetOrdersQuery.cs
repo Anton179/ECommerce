@@ -1,5 +1,4 @@
-﻿using ECommerce.Core.DataAccess.Dtos.OrderDtos;
-using ECommerce.Core.DataAccess.Entities;
+﻿using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using MediatR;
 

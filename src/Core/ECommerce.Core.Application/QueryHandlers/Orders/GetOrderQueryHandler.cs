@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ECommerce.Core.Application.Queries.Orders;
-using ECommerce.Core.DataAccess.Dtos.OrderDtos;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Infrastructure.API.Exceptions;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
+using ECommerce.Core.Application.Infrastructure.Exceptions;
+using ECommerce.Core.Application.Infrastructure.Interfaces;
 
 namespace ECommerce.Core.Application.QueryHandlers.Orders
 {
@@ -21,10 +18,10 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
         private readonly IMapper _mapper;
 
         public GetOrderQueryHandler(IGenericRepository<Order> orderRepository,
-                                     ICurrentUserProvider _currentUserProvider, IMapper mapper)
+                                     ICurrentUserProvider currentUserProvider, IMapper mapper)
         {
             _orderRepository = orderRepository;
-            this._currentUserProvider = _currentUserProvider;
+            _currentUserProvider = currentUserProvider;
             _mapper = mapper;
         }
         public async Task<OrderDto> Handle(GetOrderQuery request, CancellationToken cancellationToken = default(CancellationToken))

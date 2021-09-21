@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ECommerce.Core.DataAccess.EFConfiguration
 {
-    public class CartConfiguration : IEntityTypeConfiguration<Cart>
+    public class CartConfiguration : IEntityTypeConfiguration<CartItem>
     {
-        public void Configure(EntityTypeBuilder<Cart> builder)
+        public void Configure(EntityTypeBuilder<CartItem> builder)
         {
             builder.HasOne(c => c.Product)
-                .WithMany(p => p.Carts)
+                .WithMany(p => p.CartItems)
                 .HasForeignKey(c => c.ProductId);
 
             builder.HasOne(c => c.User)

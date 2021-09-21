@@ -1,4 +1,3 @@
-using ECommerce.Web.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -6,6 +5,7 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Threading.Tasks;
+using ECommerce.Web.IdentityServer.Infrastructure.Extensions;
 
 namespace ECommerce.Web.IdentityServer
 {

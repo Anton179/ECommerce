@@ -1,15 +1,14 @@
-﻿using ECommerce.Core.DataAccess;
+﻿using AutoMapper;
 using ECommerce.Core.DataAccess.Entities;
+using ECommerce.Core.DataAccess.Extensions;
+using ECommerce.Core.DataAccess.Interfaces;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using ECommerce.Core.DataAccess.Extensions;
-using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 
 namespace ECommerce.Core.DataAccess.Repository
 {
@@ -47,7 +46,7 @@ namespace ECommerce.Core.DataAccess.Repository
         public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
 
         public void UpdateRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().UpdateRange(entities);
-        public async Task<PaginatedResult<TDto>> GetPagedData<TDto>(PagedRequest request) where TDto : class => 
+        public async Task<PaginatedResult<TDto>> GetPagedData<TDto>(PagedRequest request) where TDto : class =>
             await _context.Set<TEntity>().CreatePaginatedResultAsync<TEntity, TDto>(request, _mapper);
-        }
+    }
 }

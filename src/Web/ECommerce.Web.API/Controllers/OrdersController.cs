@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Core.DataAccess.Models.PagedRequestModels;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.OrderCommands;
+using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 using ECommerce.Core.Application.Queries.Orders;
-using ECommerce.Core.DataAccess.Dtos.OrderDtos;
-using ECommerce.Core.DataAccess.Models.PagedRequestModels;
-using ECommerce.Infrastructure.API.Attributes;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -25,8 +23,17 @@ namespace ECommerce.Web.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "user")]
-        [HttpPost("create")]
+        [Authorize]
+        [HttpPut]
+        public async Task<ActionResult<Guid>> UpdateOrder([FromBody] UpdateOrderCommand request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = Roles.User)]
+        [HttpPost]
         public async Task<ActionResult<Guid>> CreateOrder([FromBody] CreateOrderCommand request)
         {
             var result = await _mediator.Send(request);
@@ -34,12 +41,11 @@ namespace ECommerce.Web.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "user")]
-        [HttpGet("get/{id}")]
-        [ApiExceptionFilter]
+        [Authorize(Roles = Roles.User)]
+        [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetOrderQuery() {Id = id}, cancellationToken);
+            var result = await _mediator.Send(new GetOrderQuery() { Id = id }, cancellationToken);
 
             return Ok(result);
         }

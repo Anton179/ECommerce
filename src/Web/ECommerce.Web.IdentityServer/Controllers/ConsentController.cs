@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
-using ECommerce.Core.DataAccess.ViewModels.Consent;
 using ECommerce.Web.IdentityServer.Attributes;
-using ECommerce.Web.IdentityServer.Extensions;
+using ECommerce.Web.IdentityServer.Infrastructure.Extensions;
+using ECommerce.Web.IdentityServer.ViewModels.Consent;
 
 namespace ECommerce.Web.IdentityServer.Controllers
 {

@@ -169,18 +169,18 @@ namespace ECommerce.Core.DataAccess
         {
             await configurationDbContext.ApiScopes.AddRangeAsync(new List<ApiScope>
             {
-                new ApiScope
-                {
-                    Name = "read"
-                },
-                new ApiScope
-                {
-                    Name = "write"
-                },
-                new ApiScope
-                {
-                    Name = "full"
-                },
+                //new ApiScope
+                //{
+                //    Name = "read"
+                //},
+                //new ApiScope
+                //{
+                //    Name = "write"
+                //},
+                //new ApiScope
+                //{
+                //    Name = "full"
+                //},
                 new ApiScope
                 {
                     Name = "openid"
@@ -229,21 +229,6 @@ namespace ECommerce.Core.DataAccess
                 UpdateAccessTokenClaimsOnRefresh = true,
                 AllowedScopes = new List<ClientScope>
                 {
-                    new ClientScope
-                    {
-                        Scope = "full"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "read"
-                    },
-
-                    new ClientScope
-                    {
-                        Scope = "write"
-                    },
-
                     new ClientScope
                     {
                         Scope = "openid"
@@ -340,18 +325,6 @@ namespace ECommerce.Core.DataAccess
                         },
                         new ApiResourceScope
                         {
-                            Scope = "read"
-                        },
-                        new ApiResourceScope
-                        {
-                            Scope = "write"
-                        },
-                        new ApiResourceScope
-                        {
-                            Scope = "full"
-                        },
-                        new ApiResourceScope
-                        {
                             Scope = "openid"
                         },
                         new ApiResourceScope
@@ -434,16 +407,16 @@ namespace ECommerce.Core.DataAccess
 
         private static async Task SeedResources(ECommerceDbContext eCommerceDbContext)
         {
-            var shippings = new List<Shipping>()
+            var shippings = new List<ShippingMethod>()
             {
-                new Shipping()
+                new ShippingMethod()
                 {
                     Name = "Nova Poshta",
                     Price = 25,
                     Estimated = "7-14 days",
                     Image = "assets/img/Delivery/novaposhta.png"
                 },
-                new Shipping()
+                new ShippingMethod()
                 {
                     Name = "DHL Express",
                     Price = 40,

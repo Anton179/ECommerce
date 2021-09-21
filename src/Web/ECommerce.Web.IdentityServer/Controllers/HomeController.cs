@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.ViewModels.Home;
 using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.ViewModels.Home;
 
 namespace ECommerce.Web.IdentityServer.Controllers
 {

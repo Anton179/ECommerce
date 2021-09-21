@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos;
 using ECommerce.Core.Application.Queries.Categories;
-using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {

@@ -1,7 +1,0 @@
-﻿namespace ECommerce.Core.DataAccess.ViewModels.Account
-{
-    public class LogoutInputModel
-    {
-        public string LogoutId { get; set; }
-    }
-}

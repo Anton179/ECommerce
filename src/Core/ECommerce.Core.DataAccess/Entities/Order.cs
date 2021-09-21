@@ -13,7 +13,7 @@ namespace ECommerce.Core.DataAccess.Entities
         public OrderStatus Status { get; set; }
         public PaymentType Payment { get; set; }
         public string Address { get; set; }
-        public virtual Shipping Shipping { get; set; }
+        public virtual ShippingMethod Shipping { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }

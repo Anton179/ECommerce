@@ -1,10 +1,10 @@
 ﻿using ECommerce.Core.DataAccess.Entities;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 
 namespace ECommerce.Core.DataAccess.Interfaces
 {

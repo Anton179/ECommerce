@@ -17,7 +17,7 @@ namespace ECommerce.Core.DataAccess.Entities
         public bool InStock { get; set; } = true;
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
-        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual ICollection<CharacteristicValue> Characteristics { get; set; }
         public virtual ICollection<OrderProducts> Orders { get; set; }
     }

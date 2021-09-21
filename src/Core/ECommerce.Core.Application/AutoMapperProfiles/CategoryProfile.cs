@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
+﻿using AutoMapper;
+using ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos;
 using ECommerce.Core.DataAccess.Entities;
 
 namespace ECommerce.Core.Application.AutoMapperProfiles

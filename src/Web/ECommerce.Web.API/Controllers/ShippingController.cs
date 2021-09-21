@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ECommerce.Core.Application.Queries.Shipping;
-using ECommerce.Core.DataAccess.Dtos.ShippingDtos;
+﻿using ECommerce.Core.Application.Queries.Shipping;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Dtos.ShippingMethodDtos;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -24,10 +22,10 @@ namespace ECommerce.Web.API.Controllers
         }
 
         [Authorize]
-        [HttpGet("getAll")]
-        public async Task<ActionResult<IEnumerable<ShippingDto>>> GetAll(CancellationToken cancellationToken)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ShippingMethodDto>>> GetAll(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetAllShippingsQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetAllShippingMethodsQuery(), cancellationToken);
 
             return Ok(result);
         }

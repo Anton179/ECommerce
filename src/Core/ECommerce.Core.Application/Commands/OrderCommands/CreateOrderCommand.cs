@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Dtos.ShippingDtos;
+﻿using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
+using ECommerce.Core.Application.Infrastructure.Dtos.ShippingMethodDtos;
 using ECommerce.Core.DataAccess.Enums;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using ECommerce.Core.DataAccess.Entities;
 
 namespace ECommerce.Core.Application.Commands.OrderCommands
 {
@@ -13,6 +12,7 @@ namespace ECommerce.Core.Application.Commands.OrderCommands
     {
         public PaymentType Payment { get; set; }
         public string Address { get; set; }
-        public ShippingDto Shipping { get; set; }
+        public ShippingMethodDto Shipping { get; set; }
+        public ICollection<OrderProductsDto> OrderProducts { get; set; }
     }
 }

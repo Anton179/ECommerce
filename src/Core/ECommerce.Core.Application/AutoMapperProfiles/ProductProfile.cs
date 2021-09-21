@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerce.Core.Application.Commands.ProductCommands;
-using ECommerce.Core.DataAccess.Dtos.ProductDtos;
+using ECommerce.Core.Application.Infrastructure.Dtos.ProductDtos;
 using ECommerce.Core.DataAccess.Entities;
 
 namespace ECommerce.Core.Application.AutoMapperProfiles
@@ -10,9 +10,14 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
         public ProductProfile()
         {
             CreateMap<Product, ProductDto>();
-            CreateMap<Product, ProductForDisplayDto>();
+
+            CreateMap<Product, ProductForDisplayDto>()
+                .ReverseMap();
+
             CreateMap<CreateProductCommand, ProductDto>();
+
             CreateMap<CreateProductCommand, Product>();
+            
             CreateMap<Product, CreateProductCommand>();
         }
     }

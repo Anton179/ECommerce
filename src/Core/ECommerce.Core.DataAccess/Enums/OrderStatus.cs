@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.Core.DataAccess.Enums
 {
-    public enum OrderStatus
+    public enum OrderStatus : int
     {
         Pending = 0,
         Cancelled = 1,

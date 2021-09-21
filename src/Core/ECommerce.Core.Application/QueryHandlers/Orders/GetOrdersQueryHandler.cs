@@ -1,13 +1,13 @@
-﻿using ECommerce.Core.Application.Queries.Orders;
-using ECommerce.Core.DataAccess.Entities;
+﻿using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.DataAccess.Dtos.OrderDtos;
+using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
+using ECommerce.Core.Application.Infrastructure.Interfaces;
+using ECommerce.Core.Application.Queries.Orders;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels.FilterEnums;
 
 namespace ECommerce.Core.Application.QueryHandlers.Orders
 {
@@ -26,7 +26,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
         {
             var userId = _currentUserProvider.GetUserId();
 
-            var filter = new Filter() {Path = "o => o.UserId.ToString()", Value = userId.ToString()};
+            var filter = new Filter() { Path = "o => o.UserId.ToString()", Value = userId.ToString(), Operator = FilterOperators.Equals };
             request.PagedRequest.RequestFilters.Filters.Add(filter);
 
             var result = await _orderRepository.GetPagedData<OrderDto>(request.PagedRequest);

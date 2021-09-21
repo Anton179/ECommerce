@@ -1,5 +1,5 @@
 ﻿using ECommerce.Core.Application.Commands.CartCommands;
-using ECommerce.Core.DataAccess.Dtos.CartDtos;
+using ECommerce.Core.Application.Queries.CartQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ECommerce.Core.Application.Queries.CartQueries;
-using ECommerce.Infrastructure.API.Attributes;
+using ECommerce.Core.Application.Infrastructure.Dtos.CartItemDtos;
+using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -23,48 +23,56 @@ namespace ECommerce.Web.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
-        [HttpPost("add")]
-        public async Task<ActionResult<Guid>> AddToCart([FromBody] CreateCartCommand request)
+        [Authorize(Roles = Roles.User)]
+        [HttpPost]
+        public async Task<ActionResult<Guid>> AddCartItem([FromBody] CreateCartItemCommand request)
         {
             var result = await _mediator.Send(request);
 
             return Ok(result);
         }
 
-        [Authorize]
-        [HttpGet("getCart")]
-        public async Task<ActionResult<IEnumerable<CartDto>>> GetCart(CancellationToken cancellationToken)
+        [Authorize(Roles = Roles.User)]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CartItemDto>>> GetCart(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new CartQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetCartItemsQuery(), cancellationToken);
 
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = Roles.User)]
         [HttpGet("getCount")]
         public async Task<ActionResult<int>> GetNumberOfProductsInCart(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new NumberOfProductsInCartQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetNumberOfProductsInCartItemsQuery(), cancellationToken);
 
             return Ok(result);
         }
 
-        [Authorize]
-        [HttpDelete("removeAll")]
+        [Authorize(Roles = Roles.User)]
+        [HttpDelete]
         public async Task<ActionResult> RemoveAllByCurrentUser()
         {
-            await _mediator.Send(new DeleteAllCartCommand());
+            await _mediator.Send(new DeleteAllCartItemsCommand());
 
             return NoContent();
         }
 
-        [Authorize]
-        [HttpDelete("remove/{productId}")]
-        [ApiExceptionFilter]
-        public async Task<ActionResult> RemoveByProductId([FromRoute] Guid productId)
+        [Authorize(Roles = Roles.User)]
+        [HttpDelete("{productId}")]
+        public async Task<ActionResult<Guid>> RemoveByProductId([FromRoute] Guid productId)
         {
-            var result = await _mediator.Send(new DeleteCartCommand() { ProductId = productId });
+            var result = await _mediator.Send(new DeleteCartItemCommand() { ProductId = productId });
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = Roles.User)]
+        [HttpPost("reorder/{id}")]
+        public async Task<ActionResult<Guid>> AddProductsByOrderId([FromRoute] Guid id)
+        {
+            var result = await _mediator.Send(new CreateCartItemsFromOrderCommand() { Id = id });
 
             return Ok(result);
         }

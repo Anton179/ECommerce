@@ -128,6 +128,7 @@
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -142,8 +143,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ECommerce.Core.DataAccess\ECommerce.Core.DataAccess.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\ECommerce.Infrastructure.API\ECommerce.Infrastructure.API.csproj" />
-    <ProjectReference Include="..\ECommerce.Web.API\ECommerce.Web.API.csproj" />
   </ItemGroup>
 
 </Project>

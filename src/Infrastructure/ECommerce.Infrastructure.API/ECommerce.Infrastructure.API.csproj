@@ -24,8 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\ECommerce.Core.DataAccess\ECommerce.Core.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ECommerce.Core.DataAccess.EFConfiguration
 {
-    public class ShippingConfiguration : IEntityTypeConfiguration<Shipping>
+    public class ShippingConfiguration : IEntityTypeConfiguration<ShippingMethod>
     {
-        public void Configure(EntityTypeBuilder<Shipping> builder)
+        public void Configure(EntityTypeBuilder<ShippingMethod> builder)
         {
             builder.Property(s => s.Price)
                 .IsRequired();

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using ECommerce.Core.DataAccess.Dtos.CategoryDtos;
-using MediatR;
+﻿using MediatR;
+using System.Collections.Generic;
+using ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos;
 
 namespace ECommerce.Core.Application.Queries.Categories
 {

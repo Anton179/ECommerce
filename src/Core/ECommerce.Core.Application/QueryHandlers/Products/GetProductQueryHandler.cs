@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AutoMapper;
+using ECommerce.Core.Application.Queries.Products;
+using ECommerce.Core.DataAccess.Entities;
+using ECommerce.Core.DataAccess.Interfaces;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Core.Application.Queries.Products;
-using ECommerce.Core.DataAccess.Dtos.ProductDtos;
-using ECommerce.Core.DataAccess.Dtos.UserDtos;
-using ECommerce.Core.DataAccess.Entities;
-using ECommerce.Core.DataAccess.Entities.CharacteristicsValue;
-using ECommerce.Infrastructure.API.Exceptions;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using ECommerce.Core.Application.Infrastructure.Dtos.ProductDtos;
+using ECommerce.Core.Application.Infrastructure.Exceptions;
 
 namespace ECommerce.Core.Application.QueryHandlers.Products
 {
@@ -28,6 +21,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Products
             _productRepository = productRepository;
             _mapper = mapper;
         }
+
         public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);

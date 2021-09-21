@@ -226,7 +226,7 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.ToTable("UserTokens", "Auth");
                 });
 
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Cart", b =>
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CartItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -258,7 +258,7 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Category", b =>
@@ -503,7 +503,7 @@ namespace ECommerce.Core.DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Shipping", b =>
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.ShippingMethod", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -536,7 +536,7 @@ namespace ECommerce.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shippings");
+                    b.ToTable("ShippingMethods");
                 });
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CharacteristicsValue.CharacteristicDateType", b =>
@@ -630,10 +630,10 @@ namespace ECommerce.Core.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Cart", b =>
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.CartItem", b =>
                 {
                     b.HasOne("ECommerce.Core.DataAccess.Entities.Product", "Product")
-                        .WithMany("Carts")
+                        .WithMany("CartItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -690,7 +690,7 @@ namespace ECommerce.Core.DataAccess.Migrations
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Order", b =>
                 {
-                    b.HasOne("ECommerce.Core.DataAccess.Entities.Shipping", "Shipping")
+                    b.HasOne("ECommerce.Core.DataAccess.Entities.ShippingMethod", "Shipping")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -774,14 +774,14 @@ namespace ECommerce.Core.DataAccess.Migrations
 
             modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Product", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("CartItems");
 
                     b.Navigation("Characteristics");
 
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.Shipping", b =>
+            modelBuilder.Entity("ECommerce.Core.DataAccess.Entities.ShippingMethod", b =>
                 {
                     b.Navigation("Orders");
                 });

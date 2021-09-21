@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Models.PagedRequestModels;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels.FilterEnums;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -62,7 +63,25 @@ namespace ECommerce.Core.DataAccess.Extensions
                 {
                     predicate.Append($" {requestFilters.LogicalOperator} ");
                 }
-                predicate.Append(requestFilters.Filters[i].Path + $".{nameof(string.Contains)}(@{i})");
+
+                switch (requestFilters.Filters[i].Operator)
+                {
+                    case FilterOperators.Contains:
+                        {
+                            predicate.Append(requestFilters.Filters[i].Path + $".{nameof(string.Contains)}(@{i})");
+                            break;
+                        }
+                    case FilterOperators.Equals:
+                        {
+                            predicate.Append(requestFilters.Filters[i].Path + $".{nameof(string.Equals)}(@{i})");
+                            break;
+                        }
+                    case FilterOperators.EqualsNumber:
+                        {
+                            predicate.Append(requestFilters.Filters[i].Path + $" = (@{i})");
+                            break;
+                        }
+                }
             }
 
             if (requestFilters.Filters.Any())

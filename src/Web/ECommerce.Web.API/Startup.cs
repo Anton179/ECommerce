@@ -1,24 +1,25 @@
-using System.IO;
 using ECommerce.Core.Application.AutoMapperProfiles;
 using ECommerce.Core.Application.CommandHandlers.ProductHandlers;
 using ECommerce.Core.DataAccess;
 using ECommerce.Core.DataAccess.Interfaces;
-using ECommerce.Infrastructure.API.Providers;
+using ECommerce.Web.API.Infrastructure.Attributes;
+using ECommerce.Web.API.Infrastructure.Extensions;
+using ECommerce.Web.API.Infrastructure.Providers;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 using System.Reflection;
-using ECommerce.Infrastructure.API.Extensions;
-using ECommerce.Infrastructure.API.Middlewares;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Extensions.FileProviders;
+using ECommerce.Core.Application.Infrastructure.Interfaces;
 
 namespace ECommerce.Web.API
 {
@@ -33,7 +34,9 @@ namespace ECommerce.Web.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add(new
+                ApiExceptionFilter()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ECommerce.Web.API", Version = "v1" });
@@ -72,7 +75,7 @@ namespace ECommerce.Web.API
             services.AddRepositories();
             services.AddHttpContextAccessor();
             services.AddTransient<ICurrentUserProvider, CurrentUserProvider>();
-            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateProductHandler).Assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateProductCommandHandler).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
