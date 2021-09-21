@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos;
 using ECommerce.Core.Application.Queries.Categories;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -20,10 +21,10 @@ namespace ECommerce.Web.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("main")]
-        public async Task<ActionResult<CategoryWithImageDto>> GetMainCategories(CancellationToken cancellationToken)
+        [HttpGet]
+        public async Task<ActionResult<PaginatedResult<CategoryWithImageDto>>> GetCategories([FromQuery] GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetMainCategoriesQuery(), cancellationToken);
+            var result = await _mediator.Send(request, cancellationToken);
 
             return Ok(result);
         }

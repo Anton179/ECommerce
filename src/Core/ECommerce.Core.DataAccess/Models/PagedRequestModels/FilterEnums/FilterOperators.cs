@@ -4,6 +4,7 @@
     {
         Contains = 0,
         Equals = 1,
-        EqualsNumber = 2
+        EqualsNumber = 2,
+        NotEqualsNumber = 3
     }
 }

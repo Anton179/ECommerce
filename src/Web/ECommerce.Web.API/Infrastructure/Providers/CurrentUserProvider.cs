@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ECommerce.Core.Application.Infrastructure.Exceptions;
+using ECommerce.Core.Application.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 using System.Net;
-using ECommerce.Core.Application.Infrastructure.Exceptions;
-using ECommerce.Core.Application.Infrastructure.Interfaces;
-using ECommerce.Core.DataAccess.Interfaces;
-using Microsoft.AspNetCore.Http;
 
 namespace ECommerce.Web.API.Infrastructure.Providers
 {

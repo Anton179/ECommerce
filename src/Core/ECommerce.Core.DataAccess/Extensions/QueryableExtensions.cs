@@ -81,6 +81,11 @@ namespace ECommerce.Core.DataAccess.Extensions
                             predicate.Append(requestFilters.Filters[i].Path + $" = (@{i})");
                             break;
                         }
+                    case FilterOperators.NotEqualsNumber:
+                    {
+                        predicate.Append(requestFilters.Filters[i].Path + $" != (@{i})");
+                        break;
+                    }
                 }
             }
 
