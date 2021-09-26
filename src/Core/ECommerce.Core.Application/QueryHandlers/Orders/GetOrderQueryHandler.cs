@@ -5,6 +5,7 @@ using ECommerce.Core.DataAccess.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Authorization;
 using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 using ECommerce.Core.Application.Infrastructure.Exceptions;
 using ECommerce.Core.Application.Infrastructure.Interfaces;
@@ -28,11 +29,17 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
         {
             var order = await _orderRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            var userId = _currentUserProvider.GetUserId();
-
-            if (order == null || order.UserId != userId)
+            if (order == null)
             {
                 throw new NotFoundException("Order not found!");
+            }
+
+            var userId = _currentUserProvider.GetUserId();
+            var userRole = _currentUserProvider.GetUserRole();
+
+            if (userRole == Roles.User && order.UserId != userId)
+            {
+                throw new NoAccessException();
             }
 
             var result = _mapper.Map<OrderDto>(order);

@@ -3,6 +3,7 @@ using ECommerce.Core.DataAccess.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Authorization;
 using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 using ECommerce.Core.Application.Infrastructure.Interfaces;
 using ECommerce.Core.Application.Queries.Orders;
@@ -25,11 +26,15 @@ namespace ECommerce.Core.Application.QueryHandlers.Orders
         public async Task<PaginatedResult<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
             var userId = _currentUserProvider.GetUserId();
+            var role = _currentUserProvider.GetUserRole();
 
-            var filter = new Filter() { Path = "o => o.UserId.ToString()", Value = userId.ToString(), Operator = FilterOperators.Equals };
-            request.PagedRequest.RequestFilters.Filters.Add(filter);
+            if (role == Roles.User)
+            {
+                var filter = new Filter() { Path = "UserId.ToString()", Value = userId.ToString(), Operator = FilterOperators.Equals };
+                request.RequestFilters.Filters.Add(filter);
+            }
 
-            var result = await _orderRepository.GetPagedData<OrderDto>(request.PagedRequest);
+            var result = await _orderRepository.GetPagedData<OrderDto>(request);
 
             return result;
         }

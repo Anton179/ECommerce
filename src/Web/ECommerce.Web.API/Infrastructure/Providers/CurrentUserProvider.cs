@@ -18,7 +18,7 @@ namespace ECommerce.Web.API.Infrastructure.Providers
 
         public Guid GetUserId()
         {
-            var userId = _httpContext.User.Claims.First(x => x.Type == "sub").Value;
+            var userId = _httpContext.User?.Claims.First(x => x.Type == "sub").Value;
 
             if (userId == null)
             {
@@ -26,6 +26,18 @@ namespace ECommerce.Web.API.Infrastructure.Providers
             }
 
             return new Guid(userId);
+        }
+
+        public string GetUserRole()
+        {
+            var role = _httpContext.User?.Claims.First(x => x.Type == "role").Value;
+
+            if (role == null)
+            {
+                throw new ApiException(HttpStatusCode.Unauthorized, "You are not authorized!");
+            }
+
+            return role;
         }
     }
 }

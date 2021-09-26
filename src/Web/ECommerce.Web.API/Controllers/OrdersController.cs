@@ -6,9 +6,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ECommerce.Core.Application.Commands.OrderCommands;
+using ECommerce.Core.Application.Infrastructure.Authorization;
 using ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos;
 using ECommerce.Core.Application.Queries.Orders;
-using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -41,7 +41,7 @@ namespace ECommerce.Web.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = Roles.User)]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder([FromRoute] Guid id, CancellationToken cancellationToken)
         {
@@ -52,10 +52,20 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<OrderDto>>> GetOrders([FromQuery] PagedRequest pagedRequest,
+        public async Task<ActionResult<PaginatedResult<OrderDto>>> GetOrders([FromQuery] GetOrdersQuery request,
             CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetOrdersQuery() { PagedRequest = pagedRequest }, cancellationToken);
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = Roles.Vendor)]
+        [HttpGet("products")]
+        public async Task<ActionResult<PaginatedResult<OrderProductForVendorDtos>>> GetOrderProducts([FromQuery] GetOrderProductsQuery request,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
 
             return Ok(result);
         }

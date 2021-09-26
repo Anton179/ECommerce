@@ -23,7 +23,7 @@ namespace ECommerce.Core.Application.QueryHandlers.Categories
         }
         public async Task<PaginatedResult<CategoryWithImageDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var pageResult = await _categoryRepository.GetPagedData<CategoryWithImageDto>(request.PagedRequest);
+            var pageResult = await _categoryRepository.GetPagedData<CategoryWithImageDto>(request);
 
             return pageResult;
         }

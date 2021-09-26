@@ -36,8 +36,8 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
             order.Address = updatedOrder.Address;
             order.Payment = updatedOrder.Payment;
             order.ShippingId = updatedOrder.ShippingId;
-            //order.OrderProducts = updatedOrder.OrderProducts;
             order.Price = updatedOrder.Price;
+            order.UpdatedDate = DateTime.UtcNow;
 
             _orderRepository.Update(order);
             await _orderRepository.SaveChangesAsync();

@@ -26,6 +26,7 @@ namespace ECommerce.Core.DataAccess
             {
                 await roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = "user" });
                 await roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = "vendor" });
+                await roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = "operator" });
                 await roleManager.CreateAsync(new Role { Id = Guid.NewGuid(), Name = "admin" });
             }
         }
@@ -41,13 +42,30 @@ namespace ECommerce.Core.DataAccess
                         EmailConfirmed = true,
                     };
 
-                    var result = await userManager.CreateAsync(user, "12345test");
+                    var result = await userManager.CreateAsync(user, "admin123");
                     if (result.Succeeded)
                     {
                         await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
                         await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
                         await userManager.AddClaimAsync(user, new Claim("email", user.Email));
                         await userManager.AddToRoleAsync(user, "admin");
+                    }
+                }
+                {
+                    var user = new User
+                    {
+                        UserName = "Operator",
+                        Email = "operator@gmail.com",
+                        EmailConfirmed = true,
+                    };
+
+                    var result = await userManager.CreateAsync(user, "operator123");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddClaimAsync(user, new Claim("sub", user.Id.ToString()));
+                        await userManager.AddClaimAsync(user, new Claim("userName", user.UserName));
+                        await userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                        await userManager.AddToRoleAsync(user, "operator");
                     }
                 }
                 {
@@ -169,18 +187,6 @@ namespace ECommerce.Core.DataAccess
         {
             await configurationDbContext.ApiScopes.AddRangeAsync(new List<ApiScope>
             {
-                //new ApiScope
-                //{
-                //    Name = "read"
-                //},
-                //new ApiScope
-                //{
-                //    Name = "write"
-                //},
-                //new ApiScope
-                //{
-                //    Name = "full"
-                //},
                 new ApiScope
                 {
                     Name = "openid"
@@ -395,7 +401,8 @@ namespace ECommerce.Core.DataAccess
                 await SeedResources(eCommerceDbContext);
             }
 
-            try{
+            try
+            {
                 await eCommerceDbContext.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -428,10 +435,6 @@ namespace ECommerce.Core.DataAccess
             var categories = new List<Category>();
 
             {
-                var other = new Category()
-                {
-                    Name = "Other"
-                };
                 var musicalInstruments = new Category()
                 {
                     Name = "Musical Instruments",
@@ -498,6 +501,11 @@ namespace ECommerce.Core.DataAccess
                     Name = "Consoles",
                     Parent = electronics
                 };
+                var accessories = new Category()
+                {
+                    Name = "Accessories",
+                    Parent = consoles
+                };
                 var videoGames = new Category()
                 {
                     Name = "Video Games",
@@ -527,8 +535,8 @@ namespace ECommerce.Core.DataAccess
 
                 categories.AddRange(new List<Category>()
                 {
-                    other, musicalInstruments, clothes, fishing, autoAccessories, homeAndGarden, sports, electronics, phones, mobilePhones, homePhones,
-                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans, consoles
+                    musicalInstruments, clothes, fishing, autoAccessories, homeAndGarden, sports, electronics, phones, mobilePhones, homePhones,
+                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans, consoles, accessories
                 });
             }
 
@@ -536,6 +544,7 @@ namespace ECommerce.Core.DataAccess
 
             var mobilePhonesCat = categories.FirstOrDefault(c => c.Name == "Mobile Phones");
             var consolesCat = categories.FirstOrDefault(x => x.Name == "Consoles");
+            var accessoriesCat = categories.FirstOrDefault(x => x.Name == "Accessories");
 
             var products = new List<Product>()
             {
@@ -711,6 +720,21 @@ namespace ECommerce.Core.DataAccess
 
             var characteristics = new List<Characteristic>()
             {
+                new Characteristic()
+                {
+                    Name = "Audio",
+                    Category = accessoriesCat,
+                },
+                new Characteristic()
+                {
+                    Name = "System requirements",
+                    Category = accessoriesCat,
+                },
+                new Characteristic()
+                {
+                    Name = "Battery",
+                    Category = accessoriesCat,
+                },
                 new Characteristic()
                 {
                     Name = "Selfie camera",
@@ -946,6 +970,197 @@ namespace ECommerce.Core.DataAccess
                     Product = products.FirstOrDefault(c => c.Name == "Xiaomi redmi note 9 pro")
                 }
             };
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Elite Wireless Controller Series 2 - Halo Infinite Limited Edition",
+                    Description =
+                        "Step inside the armor of humanity’s greatest hero with the Xbox Elite Wireless Controller Series 2 – Halo Infinite Limited Edition featuring over 30 new ways to play like a pro. Fire with Spartan-like speed using the Hair Trigger Locks with three discrete settings. Enhance your aiming with new adjustable-tension thumbsticks and stay on target with a wrap-around rubberized diamond grip.",
+                    Category = accessoriesCat,
+                    Price = 200,
+                    Weight = 0.345,
+                    ImageUrl = "assets/img/Products/XboxEliteWirelessControllerSeries2.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 40 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Xbox, Windows 7, Windows 10"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Wireless Controller – Forza Horizon 5 Limited Edition",
+                    Description = "Grab the Xbox Wireless Controller – Forza Horizon 5 Limited Edition for the ultimate Horizon adventure, featuring racing inspired custom grips and a first-ever transparent yellow finish. Take control over all terrain with textured trigger grip, and custom bottom and side dimple grip patterns inspired by perforated style performance car steering wheels.",
+                    Category = accessoriesCat,
+                    Price = 75,
+                    Weight = 0.345,
+                    ImageUrl = "assets/img/Products/XboxWirelessController–ForzaHorizon5LimitedEdition.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 40 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Xbox, Windows 7, Windows 10"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Wireless Controller Carbon Black",
+                    Description = "Experience the modernized design of the Xbox Wireless Controller, featuring sculpted surfaces and refined geometry for enhanced comfort during gameplay. Stay on target with textured grip and a hybrid D-pad. Seamlessly capture and share content with a dedicated Share button.",
+                    Category = accessoriesCat,
+                    Price = 50,
+                    Weight = 0.345,
+                    ImageUrl = "assets/img/Products/XboxWirelessControllerBlack.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 40 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Xbox, Windows 7, Windows 10"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Wireless Controller – Electric Volt",
+                    Description = "Experience the modernized design of the Xbox Wireless Controller, featuring sculpted surfaces and refined geometry for enhanced comfort during gameplay. Stay on target with textured grip and a hybrid D-pad. Seamlessly capture and share content with a dedicated Share button.",
+                    Category = accessoriesCat,
+                    Price = 65,
+                    Weight = 0.345,
+                    ImageUrl = "assets/img/Products/XboxWirelessControllerElectricVolt.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 40 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Xbox, Windows 7, Windows 10"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Xbox Wireless Controller - Pulse Red",
+                    Description = "Experience the modernized design of the Xbox Wireless Controller, featuring sculpted surfaces and refined geometry for enhanced comfort during gameplay. Stay on target with textured grip and a hybrid D-pad. Seamlessly capture and share content with a dedicated Share button.",
+                    Category = accessoriesCat,
+                    Price = 60,
+                    Weight = 0.345,
+                    ImageUrl = "assets/img/Products/XboxWirelessControllerPulseRed.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 40 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Xbox, Windows 7, Windows 10"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
 
             await eCommerceDbContext.AddRangeAsync(shippings);
             await eCommerceDbContext.AddRangeAsync(characteristics);

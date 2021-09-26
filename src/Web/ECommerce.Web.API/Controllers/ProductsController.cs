@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Authorization;
 using ECommerce.Core.Application.Infrastructure.Dtos.ProductDtos;
-using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
@@ -45,7 +45,7 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<ProductForDisplayDto>>> GetProducts([FromQuery] GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<ActionResult<PaginatedResult<ProductForDisplayDto>>> GetProducts([FromQuery] GetProductsQuery request, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(request, cancellationToken);
 
@@ -66,6 +66,15 @@ namespace ECommerce.Web.API.Controllers
         public async Task<ActionResult<Guid>> DeleteProductById([FromRoute] Guid id)
         {
             var result = await _mediator.Send(new DeleteProductCommand() { Id = id });
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("getOrderedProducts")]
+        public async Task<ActionResult<PaginatedResult<ProductForDisplayDto>>> GetOrderedProducts([FromQuery] GetOrderedProductsQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
 
             return Ok(result);
         }

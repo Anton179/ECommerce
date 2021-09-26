@@ -8,5 +8,6 @@ namespace ECommerce.Core.Application.Infrastructure.Dtos.OrderDtos
         public Guid Id { get; set; }
         public virtual ProductForDisplayDto Product { get; set; }
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
     }
 }

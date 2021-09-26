@@ -40,7 +40,7 @@ namespace ECommerce.Core.DataAccess.Extensions
 
         private static IQueryable<T> Paginate<T>(this IQueryable<T> query, PagedRequest pagedRequest)
         {
-            var entities = query.Skip(pagedRequest.PageIndex * pagedRequest.PageSize).Take(pagedRequest.PageSize);
+            var entities = query.Skip((pagedRequest.PageIndex - 1) * pagedRequest.PageSize).Take(pagedRequest.PageSize);
             return entities;
         }
 
@@ -68,7 +68,7 @@ namespace ECommerce.Core.DataAccess.Extensions
                 {
                     case FilterOperators.Contains:
                         {
-                            predicate.Append(requestFilters.Filters[i].Path + $".{nameof(string.Contains)}(@{i})");
+                            predicate.Append(requestFilters.Filters[i].Path + $".ToLower().{nameof(string.Contains)}(@{i}.ToLower())");
                             break;
                         }
                     case FilterOperators.Equals:
@@ -82,10 +82,15 @@ namespace ECommerce.Core.DataAccess.Extensions
                             break;
                         }
                     case FilterOperators.NotEqualsNumber:
-                    {
-                        predicate.Append(requestFilters.Filters[i].Path + $" != (@{i})");
-                        break;
-                    }
+                        {
+                            predicate.Append(requestFilters.Filters[i].Path + $" != (@{i})");
+                            break;
+                        }
+                    case FilterOperators.Custom:
+                        {
+                            predicate.Append(requestFilters.Filters[i].Path);
+                            break;
+                        }
                 }
             }
 

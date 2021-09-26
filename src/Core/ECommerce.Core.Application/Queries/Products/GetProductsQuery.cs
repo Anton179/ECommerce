@@ -4,8 +4,7 @@ using MediatR;
 
 namespace ECommerce.Core.Application.Queries.Products
 {
-    public class GetAllProductsQuery : IRequest<PaginatedResult<ProductForDisplayDto>>
+    public class GetProductsQuery : PagedRequest, IRequest<PaginatedResult<ProductForDisplayDto>>
     {
-        public PagedRequest PagedRequest { get; set; }
     }
 }

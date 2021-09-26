@@ -11,8 +11,8 @@ namespace ECommerce.Core.DataAccess.Entities
 
         protected BaseEntity()
         {
-            this.CreatedDate = DateTime.Today;
-            this.UpdatedDate = DateTime.Today;
+            this.CreatedDate = DateTime.UtcNow;
+            this.UpdatedDate = DateTime.UtcNow;
         }
     }
 }

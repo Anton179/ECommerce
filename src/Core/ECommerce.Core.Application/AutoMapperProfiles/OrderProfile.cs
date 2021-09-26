@@ -28,6 +28,10 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
                 .ForMember(o => o.ProductId, source => source.MapFrom(o => o.Product.Id))
                 .ForPath(o => o.Price, source => source.MapFrom(o => o.Product.Price));
 
+            CreateMap<OrderProducts, OrderProductForVendorDtos>()
+                .ForMember(o => o.User, source => source.MapFrom(o => o.Order.User))
+                .ForMember(o => o.Status, source => source.MapFrom(o => o.Order.Status));
+
             CreateMap<OrderProductForCreateDto, OrderProducts>();
         }
     }

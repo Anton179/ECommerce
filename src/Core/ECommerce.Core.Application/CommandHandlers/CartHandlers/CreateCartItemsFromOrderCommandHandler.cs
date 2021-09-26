@@ -50,9 +50,6 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
                 }
             });
 
-            //cartList = cartList.Where(x => currentCartList.FirstOrDefault(y => y.ProductId == x.ProductId) == null)
-            //    .ToList();
-
             cartList = cartList.Where(x => !currentCartList.Any(y => y.ProductId == x.ProductId))
                 .ToList();
 

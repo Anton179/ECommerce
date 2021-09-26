@@ -31,6 +31,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
         private readonly ILogger<ExternalController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IEventService _events;
+        private readonly List<string> _providerList = new List<string> {"Google"};
 
         public ExternalController(
             IIdentityServerInteractionService interaction,
@@ -108,7 +109,7 @@ namespace ECommerce.Web.IdentityServer.Controllers
                 // simply auto-provisions new external user
                 user = AutoProvisionUser(claims);
 
-                if (provider != "Google")
+                if (!_providerList.Contains(provider))
                 {
                     throw new Exception("Unsupported external provider");
                 }

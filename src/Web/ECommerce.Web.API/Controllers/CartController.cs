@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using ECommerce.Core.Application.Infrastructure.Authorization;
 using ECommerce.Core.Application.Infrastructure.Dtos.CartItemDtos;
-using ECommerce.Web.API.Infrastructure.Authorization;
 
 namespace ECommerce.Web.API.Controllers
 {
