@@ -69,5 +69,23 @@ namespace ECommerce.Web.API.Controllers
 
             return Ok(result);
         }
+
+        [Authorize(Roles = Roles.User)]
+        [HttpGet("getCount")]
+        public async Task<ActionResult<int>> GetNumberOfOrdersByCurrentUser([FromQuery] GetNumberOfOrdersByCurrentUserQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = Roles.Vendor)]
+        [HttpGet("getProductsCount")]
+        public async Task<ActionResult<int>> GetNumberOfOrderProductsByCurrentUser([FromQuery] GetNumberOfOrderProductsByCurrentUserQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
     }
 }

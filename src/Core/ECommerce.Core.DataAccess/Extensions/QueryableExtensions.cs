@@ -21,9 +21,9 @@ namespace ECommerce.Core.DataAccess.Extensions
 
             var total = await query.CountAsync();
 
-            query = query.Paginate(pagedRequest);
-
             query = query.Sort(pagedRequest);
+
+            query = query.Paginate(pagedRequest);
 
             var projectionResult = query.ProjectTo<TDto>(mapper.ConfigurationProvider);
 
