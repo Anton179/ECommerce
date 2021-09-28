@@ -545,6 +545,7 @@ namespace ECommerce.Core.DataAccess
             var mobilePhonesCat = categories.FirstOrDefault(c => c.Name == "Mobile Phones");
             var consolesCat = categories.FirstOrDefault(x => x.Name == "Consoles");
             var accessoriesCat = categories.FirstOrDefault(x => x.Name == "Accessories");
+            var computersCat = categories.FirstOrDefault(x => x.Name == "Computers and Tablets");
 
             var products = new List<Product>()
             {
@@ -760,6 +761,27 @@ namespace ECommerce.Core.DataAccess
                 {
                     Name = "Storage size",
                     Category = consolesCat
+                },
+
+                new Characteristic()
+                {
+                    Name = "Operating System",
+                    Category = computersCat
+                },
+                new Characteristic()
+                {
+                    Name = "Screen Size",
+                    Category = computersCat
+                },
+                new Characteristic()
+                {
+                    Name = "Specific Uses For Product",
+                    Category = computersCat
+                },
+                new Characteristic()
+                {
+                    Name = "Series",
+                    Category = computersCat
                 },
             };
 
@@ -1155,6 +1177,536 @@ namespace ECommerce.Core.DataAccess
                         Product = product,
                         Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
                         ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - Gold",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4Gold.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - Red Camouflage",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4RedCamouflage.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - Rose Gold",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4RoseGold.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - Steel Black",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4SteelBlack.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - Berry Blue",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4BerryBlue.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "DualShock 4 Wireless Controller - The Last of Us Part II",
+                    Description = "Our most comfortable, intuitive controller ever designed. Now even better, and available in a range of colors and styles.",
+                    Category = accessoriesCat,
+                    Price = 70,
+                    Weight = 0.34,
+                    ImageUrl = "assets/img/Products/DualShock4TLOU2.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 30 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps4, Ps4 pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "PlayStation 5 DualSense Wireless Controller",
+                    Description = "The DualSense has kept what gamers love about the DualShock 4, while also adding new functionality and refining the design. The DualSense has adaptive triggers built into the L2 and R2 buttons so you can truly feel the tension of your actions, a strong battery life with rechargeable battery whilst also keeping the controller lightweight.",
+                    Category = accessoriesCat,
+                    Price = 97,
+                    Weight = 0.43,
+                    ImageUrl = "assets/img/Products/PS5DualSenseController.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Battery"),
+                        ValueStr = "Up to 50 hours"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "System requirements"),
+                        ValueStr = "Ps5"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Audio"),
+                        ValueDec = 3.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Microsoft Surface Laptop Go",
+                    Description = "Sleek design and standout value. At just 2.44 lbs, it’s light, portable, and easy to keep by your side throughout the day. Be productive, browse, and binge watch on the 12.4” PixelSense touchscreen display. Convenient security with Windows Hello sign-in, plus Fingerprint Power Button with Windows Hello and One Touch sign-in on select models.",
+                    Category = computersCat,
+                    Price = 749,
+                    Weight = 1.11,
+                    ImageUrl = "assets/img/Products/MicrosoftSurfaceLaptopGo.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 10"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Business"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "Surface Laptop Go"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 12.4M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Microsoft Surface Pro 7",
+                    Description = "Faster than surface pro 6, with a 10th gen intel core processor – redefining what’s possible in a thin and light computer. Display Resolution - 2736 x 1824 (267 PPI)",
+                    Category = computersCat,
+                    Price = 999,
+                    Weight = 0.77,
+                    ImageUrl = "assets/img/Products/MicrosoftSurfacePro.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 10"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Personal"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "Surface Pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 12.3M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Microsoft Surface Laptop 3",
+                    Description = "Faster than surface pro 6, with a 10th gen intel core processor – redefining what’s possible in a thin and light computer. Display Resolution - 2736 x 1824 (267 PPI)",
+                    Category = computersCat,
+                    Price = 560,
+                    Weight = 0.77,
+                    ImageUrl = "assets/img/Products/MicrosoftSurfaceLaptop3.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 10 Home"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Personal"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "Surface Laptop"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 13.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("2ca243b2-a35d-4941-a618-073c284c40a4"),
+                    Name = "Microsoft Surface Pro 6",
+                    Description = "Faster than surface pro 6, with a 10th gen intel core processor – redefining what’s possible in a thin and light computer. Display Resolution - 2736 x 1824 (267 PPI)",
+                    Category = computersCat,
+                    Price = 899,
+                    Weight = 1.6,
+                    ImageUrl = "assets/img/Products/MicrosoftSurfacePro6.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 10 Home"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Personal"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "Surface Pro"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 12.3M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "Sony VAIO EL2 VPCEL22FX",
+                    Description = "Whether it is open or closed, you will find yourself wanting to feel this VAIO E Series laptop. With a textured, diamond-shaped pattern embossed on the lid and palm rest, this PC is artfully crafted to be pleasing to the eyes and to the touch without leaving any fingerprint smudges.",
+                    Category = computersCat,
+                    Price = 340,
+                    Weight = 2.67,
+                    ImageUrl = "assets/img/Products/SonyVAIOEL2VPCEL22FX.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 7 Home"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Personal"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "VAIO EL Series"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 15.5M
+                    }
+                };
+
+                await eCommerceDbContext.AddAsync(product);
+                await eCommerceDbContext.AddRangeAsync(productCharacteristicsValues);
+            }
+
+            {
+                var product = new Product()
+                {
+                    OwnerId = new Guid("c3c70f23-ed99-430b-b587-f3ad698356c3"),
+                    Name = "Sony VPCEG1BFX",
+                    Description = "Whether it is open or closed, you will find yourself wanting to feel this VAIO E Series laptop. With a textured, diamond-shaped pattern embossed on the lid and palm rest, this PC is artfully crafted to be pleasing to the eyes and to the touch without leaving any fingerprint smudges.",
+                    Category = computersCat,
+                    Price = 290,
+                    Weight = 2.31,
+                    ImageUrl = "assets/img/Products/SonyVPCEG1BFX.png"
+                };
+
+                var productCharacteristicsValues = new List<CharacteristicValue>()
+                {
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Operating System"),
+                        ValueStr = "Windows 7 Home"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Specific Uses For Product"),
+                        ValueStr = "Personal"
+                    },
+                    new CharacteristicStringType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Series"),
+                        ValueStr = "VAIO EL Series"
+                    },
+                    new CharacteristicDecimalType()
+                    {
+                        Product = product,
+                        Characteristic = characteristics.FirstOrDefault(ch => ch.Name == "Screen Size"),
+                        ValueDec = 14M
                     }
                 };
 
