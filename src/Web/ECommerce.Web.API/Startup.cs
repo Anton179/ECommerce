@@ -1,7 +1,6 @@
 using ECommerce.Core.Application.AutoMapperProfiles;
 using ECommerce.Core.Application.CommandHandlers.ProductHandlers;
 using ECommerce.Core.DataAccess;
-using ECommerce.Core.DataAccess.Interfaces;
 using ECommerce.Web.API.Infrastructure.Attributes;
 using ECommerce.Web.API.Infrastructure.Extensions;
 using ECommerce.Web.API.Infrastructure.Providers;
@@ -57,6 +56,7 @@ namespace ECommerce.Web.API
                 });
 
             services.AddCors();
+
             services.AddDbContext<ECommerceDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ECommerceConnection"));
@@ -96,6 +96,7 @@ namespace ECommerce.Web.API
 
             app.UseRouting();
 
+            app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),

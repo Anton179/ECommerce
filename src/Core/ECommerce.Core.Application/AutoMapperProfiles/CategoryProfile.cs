@@ -10,7 +10,7 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
         {
             CreateMap<Category, CategoryWithParentDto>();
             CreateMap<Category, CategoryWithSubCategoriesDto>();
-            CreateMap<Category, CategoryWithImageDto>();
+            CreateMap<Category, CategoryDto>();
         }
     }
 }

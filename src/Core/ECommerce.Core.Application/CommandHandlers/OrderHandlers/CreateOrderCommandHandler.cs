@@ -4,7 +4,6 @@ using ECommerce.Core.DataAccess.Entities;
 using ECommerce.Core.DataAccess.Enums;
 using ECommerce.Core.DataAccess.Interfaces;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,8 +58,6 @@ namespace ECommerce.Core.Application.CommandHandlers.OrderHandlers
             _cartRepository.DeleteRange(carts);
 
             await _orderRepository.SaveChangesAsync();
-            await _orderProductsRepository.SaveChangesAsync();
-            await _cartRepository.SaveChangesAsync();
 
             return order.Id;
         }

@@ -725,63 +725,75 @@ namespace ECommerce.Core.DataAccess
                 {
                     Name = "Audio",
                     Category = accessoriesCat,
+                    Type = typeof(decimal).Name
                 },
                 new Characteristic()
                 {
                     Name = "System requirements",
                     Category = accessoriesCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Battery",
                     Category = accessoriesCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Selfie camera",
-                    Category = mobilePhonesCat
+                    Category = mobilePhonesCat,
+                    Type = typeof(decimal).Name
                 },
                 new Characteristic()
                 {
                     Name = "Display",
-                    Category = mobilePhonesCat
+                    Category = mobilePhonesCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Released",
-                    Category = categories.FirstOrDefault(c => c.Name == "Electronics")
+                    Category = categories.FirstOrDefault(c => c.Name == "Electronics"),
+                    Type = typeof(DateTime).Name
                 },
 
                 new Characteristic()
                 {
                     Name = "Memory",
-                    Category = consolesCat
+                    Category = consolesCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Storage size",
-                    Category = consolesCat
+                    Category = consolesCat,
+                    Type = typeof(string).Name
                 },
 
                 new Characteristic()
                 {
                     Name = "Operating System",
-                    Category = computersCat
+                    Category = computersCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Screen Size",
-                    Category = computersCat
+                    Category = computersCat,
+                    Type = typeof(decimal).Name
                 },
                 new Characteristic()
                 {
                     Name = "Specific Uses For Product",
-                    Category = computersCat
+                    Category = computersCat,
+                    Type = typeof(string).Name
                 },
                 new Characteristic()
                 {
                     Name = "Series",
-                    Category = computersCat
+                    Category = computersCat,
+                    Type = typeof(string).Name
                 },
             };
 

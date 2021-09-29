@@ -13,7 +13,7 @@ using MediatR;
 
 namespace ECommerce.Core.Application.QueryHandlers.Categories
 {
-    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, PaginatedResult<CategoryWithImageDto>>
+    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, PaginatedResult<CategoryDto>>
     {
         private readonly IGenericRepository<Category> _categoryRepository;
 
@@ -21,9 +21,9 @@ namespace ECommerce.Core.Application.QueryHandlers.Categories
         {
             _categoryRepository = categoryRepository;
         }
-        public async Task<PaginatedResult<CategoryWithImageDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedResult<CategoryDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var pageResult = await _categoryRepository.GetPagedData<CategoryWithImageDto>(request);
+            var pageResult = await _categoryRepository.GetPagedData<CategoryDto>(request);
 
             return pageResult;
         }

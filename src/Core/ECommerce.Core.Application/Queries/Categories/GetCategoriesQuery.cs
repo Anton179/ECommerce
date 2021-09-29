@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ECommerce.Core.Application.Queries.Categories
 {
-    public class GetCategoriesQuery : PagedRequest, IRequest<PaginatedResult<CategoryWithImageDto>>
+    public class GetCategoriesQuery : PagedRequest, IRequest<PaginatedResult<CategoryDto>>
     {
     }
 }

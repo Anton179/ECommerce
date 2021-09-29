@@ -22,7 +22,7 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<CategoryWithImageDto>>> GetCategories([FromQuery] GetCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<ActionResult<PaginatedResult<CategoryDto>>> GetCategories([FromQuery] GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(request, cancellationToken);
 

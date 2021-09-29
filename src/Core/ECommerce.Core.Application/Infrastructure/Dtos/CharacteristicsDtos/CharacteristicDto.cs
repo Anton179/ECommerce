@@ -1,7 +1,11 @@
-﻿namespace ECommerce.Core.Application.Infrastructure.Dtos.CharacteristicsDtos
+﻿using System;
+
+namespace ECommerce.Core.Application.Infrastructure.Dtos.CharacteristicsDtos
 {
-    public abstract class CharacteristicDto
+    public class CharacteristicDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

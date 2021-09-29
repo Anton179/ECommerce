@@ -11,6 +11,7 @@ namespace ECommerce.Core.DataAccess.Entities
     {
         public Guid CategoryId { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<CharacteristicValue> Characteristics { get; set; }
     }

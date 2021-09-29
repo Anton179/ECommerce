@@ -42,7 +42,6 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             await _characteristicValueRepository.AddRangeAsync(characteristicsValueList);
 
             await _productRepository.SaveChangesAsync();
-            await _characteristicValueRepository.SaveChangesAsync();
 
             return product.Id;
         }

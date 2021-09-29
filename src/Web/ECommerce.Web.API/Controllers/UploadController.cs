@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Core.Application.Commands.UploadCommands;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
@@ -11,33 +14,20 @@ namespace ECommerce.Web.API.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload()
-        {
-            try
-            {
-                var formCollection = await Request.ReadFormAsync();
-                var file = formCollection.Files.First();
-                var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                if (file.Length > 0)
-                {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    return Ok(new { dbPath });
-                }
+        private readonly IMediator _mediator;
 
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
+        public UploadController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [AllowAnonymous]
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> UploadImage([FromQuery] Guid productId)
+        {
+            var result = _mediator.Send(new UploadImageCommand() { FormCollection = await Request.ReadFormAsync(), ProductId = productId });
+
+            return Ok(result);
         }
     }
 }
