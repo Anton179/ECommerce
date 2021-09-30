@@ -23,9 +23,9 @@ namespace ECommerce.Web.API.Controllers
 
         [AllowAnonymous]
         [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadImage([FromQuery] Guid productId)
+        public async Task<IActionResult> UploadImage([FromQuery] string imageId)
         {
-            var result = _mediator.Send(new UploadImageCommand() { FormCollection = await Request.ReadFormAsync(), ProductId = productId });
+            var result = _mediator.Send(new UploadImageCommand() { FormCollection = await Request.ReadFormAsync(), ImageId = imageId });
 
             return Ok(result);
         }

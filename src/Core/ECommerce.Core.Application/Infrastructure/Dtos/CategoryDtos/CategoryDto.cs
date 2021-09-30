@@ -8,7 +8,7 @@ namespace ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
         public virtual ICollection<CharacteristicDto> Characteristics { get; set; }
     }
 }

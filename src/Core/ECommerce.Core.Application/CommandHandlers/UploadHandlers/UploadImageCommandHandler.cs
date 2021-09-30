@@ -13,11 +13,11 @@ namespace ECommerce.Core.Application.QueryHandlers.UploadHandlers
     {
         public async Task<object> Handle(UploadImageCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var productId = request.ProductId;
+            var imageId = request.ImageId;
 
-            if (productId == default(Guid))
+            if (string.IsNullOrWhiteSpace(imageId))
             {
-                productId = Guid.NewGuid();
+                imageId = Guid.NewGuid().ToString() + ".png";
             }
 
             var file = request.FormCollection.Files.First();
@@ -25,15 +25,15 @@ namespace ECommerce.Core.Application.QueryHandlers.UploadHandlers
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             if (file.Length > 0)
             {
-                var fileName = productId.ToString() + ".png";
+                var fileName = imageId.ToString();
                 var fullPath = Path.Combine(pathToSave, fileName);
-                var dbPath = Path.Combine(folderName, fileName);
+                var imagePath = Path.Combine(folderName, fileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
 
-                return new { dbPath, productId };
+                return new { imagePath, imageId };
             }
             
             throw new Exception("Internal server error");

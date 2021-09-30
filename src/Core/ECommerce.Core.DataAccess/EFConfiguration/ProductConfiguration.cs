@@ -25,7 +25,7 @@ namespace ECommerce.Core.DataAccess.EFConfiguration
             builder.Property(p => p.Price)
                 .IsRequired();
 
-            builder.Property(p => p.ImageUrl)
+            builder.Property(p => p.ImagePath)
                 .IsRequired();
 
             builder.Property(p => p.RowVersion)

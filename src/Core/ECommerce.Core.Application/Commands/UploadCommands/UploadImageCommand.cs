@@ -6,7 +6,7 @@ namespace ECommerce.Core.Application.Commands.UploadCommands
 {
     public class UploadImageCommand : IRequest<object>
     {
-        public Guid ProductId { get; set; }
+        public string ImageId{ get; set; }
         public IFormCollection FormCollection { get; set; }
     }
 }

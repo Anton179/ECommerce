@@ -38,7 +38,7 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             product.Price = request.Price;
             product.Weight = request.Weight;
             product.InStock = (bool)request.InStock;
-            product.ImageUrl = request.ImageUrl;
+            product.ImagePath = request.ImagePath;
 
             _productRepository.Update(product);
             await _productRepository.SaveChangesAsync();

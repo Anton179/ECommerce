@@ -8,7 +8,7 @@ namespace ECommerce.Core.DataAccess.Entities
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
         public string Estimated { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

@@ -13,7 +13,7 @@ namespace ECommerce.Core.Application.Infrastructure.Dtos.ProductDtos
         public string Description { get; set; }
         public decimal Price { get; set; }
         public double Weight { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImagePath { get; set; }
         public bool InStock { get; set; }
         public virtual UserDto User { get; set; }
         public virtual CategoryWithParentDto Category { get; set; }

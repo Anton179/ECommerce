@@ -19,7 +19,7 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         [Range(0.1, 5000)]
         public double Weight { get; set; }
         [Required]
-        public string ImageUrl { get; set; }
+        public string ImagePath { get; set; }
         [Required]
         public Guid? CategoryId { get; set; }
         [Required]
