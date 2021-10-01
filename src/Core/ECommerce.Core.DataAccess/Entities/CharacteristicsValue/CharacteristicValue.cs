@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Core.DataAccess.Entities.CharacteristicsValue
 {
-    public abstract class CharacteristicValue : BaseEntity
+    public class CharacteristicValue : BaseEntity
     {
         public Guid CharacteristicId { get; set; }
         public Guid ProductId { get; set; }

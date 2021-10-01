@@ -33,7 +33,7 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
         public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var product = _mapper.Map<Product>(request);
-            var characteristicsValueList = MapCharacteristics(request.CharacteristicsValue);
+            var characteristicsValueList = MapCharacteristics(request.Characteristics);
 
             product.OwnerId = _currentUserProvider.GetUserId();
             product.Characteristics = characteristicsValueList;
@@ -41,7 +41,14 @@ namespace ECommerce.Core.Application.CommandHandlers.ProductHandlers
             await _productRepository.AddAsync(product);
             await _characteristicValueRepository.AddRangeAsync(characteristicsValueList);
 
-            await _productRepository.SaveChangesAsync();
+            try
+            {
+                await _productRepository.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             return product.Id;
         }

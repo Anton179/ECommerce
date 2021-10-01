@@ -50,7 +50,8 @@ namespace ECommerce.Core.Application.AutoMapperProfiles
             CreateMap<CharacteristicValueDto, CharacteristicDateType>()
                 .ForMember(ch => ch.ValueDate, source => source.MapFrom(ch => ch.Value));
 
-            CreateMap<Characteristic, CharacteristicDto>();
+            CreateMap<Characteristic, CharacteristicDto>()
+                .ForMember(ch => ch.CharacteristicId, source => source.MapFrom(ch => ch.Id));
         }
     }
 }

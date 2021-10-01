@@ -30,8 +30,7 @@ namespace ECommerce.Web.API.Controllers
         {
             var result = await _mediator.Send(request);
 
-
-            return CreatedAtAction(nameof(GetProductById), new { id = result }, request);
+            return Ok(result);
         }
 
         [Authorize(Roles = Roles.Vendor)]

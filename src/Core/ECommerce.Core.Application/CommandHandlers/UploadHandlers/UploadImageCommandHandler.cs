@@ -33,6 +33,8 @@ namespace ECommerce.Core.Application.QueryHandlers.UploadHandlers
                     file.CopyTo(stream);
                 }
 
+                imagePath = request.UriPath + "/" + imagePath;
+
                 return new { imagePath, imageId };
             }
             
