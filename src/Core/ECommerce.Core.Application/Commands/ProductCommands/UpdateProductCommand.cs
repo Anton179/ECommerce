@@ -8,8 +8,7 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
 {
     public class UpdateProductCommand : IRequest<Guid>
     {
-        [Required]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(254)]
         [Required]
         public string Name { get; set; }
@@ -24,7 +23,9 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         public string ImagePath { get; set; }
         [Required]
         public bool? InStock { get; set; }
+        [Required]
         public Guid? CategoryId { get; set; }
+        [Required]
         public virtual ICollection<CharacteristicValueDto> Characteristics { get; set; }
     }
 }

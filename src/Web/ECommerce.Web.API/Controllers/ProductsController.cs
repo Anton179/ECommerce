@@ -35,8 +35,9 @@ namespace ECommerce.Web.API.Controllers
 
         [Authorize(Roles = Roles.Vendor)]
         [HttpPut("{id}")]
-        public async Task<ActionResult<Guid>> UpdateProduct(UpdateProductCommand request)
+        public async Task<ActionResult<Guid>> UpdateProduct([FromBody] UpdateProductCommand request, [FromRoute] Guid id)
         {
+            request.Id = id;
             var result = await _mediator.Send(request);
 
             return Ok(result);

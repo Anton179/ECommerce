@@ -31,7 +31,7 @@ namespace ECommerce.Core.Application.CommandHandlers.CartHandlers
 
             if (cart == null)
             {
-                throw new NotFoundException("The product does not exist in cart");
+                throw new NotFoundException("The cart item does not exist in cart");
             }
 
             _cartRepository.Delete(cart);
