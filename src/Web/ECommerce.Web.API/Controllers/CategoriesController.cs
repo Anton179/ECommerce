@@ -21,6 +21,15 @@ namespace ECommerce.Web.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("paginated-search")]
+        public async Task<ActionResult<PaginatedResult<CategoryDto>>> GetPagedCategories([FromQuery] GetPagedCategoriesQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<PaginatedResult<CategoryDto>>> GetCategories([FromQuery] GetCategoriesQuery request, CancellationToken cancellationToken)
         {

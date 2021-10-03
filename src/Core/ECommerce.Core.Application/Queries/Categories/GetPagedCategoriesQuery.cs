@@ -1,10 +1,10 @@
 ﻿using ECommerce.Core.Application.Infrastructure.Dtos.CategoryDtos;
+using ECommerce.Core.DataAccess.Models.PagedRequestModels;
 using MediatR;
-using System.Collections.Generic;
 
 namespace ECommerce.Core.Application.Queries.Categories
 {
-    public class GetCategoriesQuery : IRequest<List<CategoryDto>>
+    public class GetPagedCategoriesQuery : PagedRequest, IRequest<PaginatedResult<CategoryDto>>
     {
     }
 }
