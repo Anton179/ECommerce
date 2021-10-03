@@ -558,7 +558,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiMiNote10.png",
-                    ImageId = "XiaomiMiNote10.png",
                 },
                 new Product()
                 {
@@ -570,7 +569,6 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiMi10Pro.png",
                     InStock = false,
-                    ImageId = "XiaomiMi10Pro.png",
                 },
                 new Product()
                 {
@@ -582,7 +580,6 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/iPhone12.png",
                     InStock = false,
-                    ImageId = "iPhone12.png",
                 },
                 new Product()
                 {
@@ -593,7 +590,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/iPhone11.png",
-                    ImageId = "iPhone11.png",
                 },
                 new Product()
                 {
@@ -605,7 +601,6 @@ namespace ECommerce.Core.DataAccess
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/iPhoneX.png",
                     InStock = false,
-                    ImageId = "iPhoneX.png",
                 },
                 new Product()
                 {
@@ -616,7 +611,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiMi10.png",
-                    ImageId = "XiaomiMi10.png",
                 },
                 new Product()
                 {
@@ -627,7 +621,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiMi11.png",
-                    ImageId = "XiaomiMi11.png",
                 },
                 new Product()
                 {
@@ -638,7 +631,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiMi11Ultra.png",
-                    ImageId = "XiaomiMi11Ultra.png",
                 },
                 new Product()
                 {
@@ -649,7 +641,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 450,
                     Weight = 1.2,
                     ImagePath = "https://localhost:44324/Resources/Images/XiaomiRedmiNote9Pro.png",
-                    ImageId = "XiaomiRedmiNote9Pro.png",
                 },
 
                 // ----------------------------------
@@ -663,7 +654,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 348,
                     Weight = 4.8,
                     ImagePath = "https://localhost:44324/Resources/Images/PS4Pro.png",
-                    ImageId = "PS4Pro.png",
                 },
                 new Product()
                 {
@@ -674,7 +664,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 270,
                     Weight = 4.1,
                     ImagePath = "https://localhost:44324/Resources/Images/PS4.png",
-                    ImageId = "PS4.png",
                 },
                 new Product()
                 {
@@ -685,7 +674,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 240,
                     Weight = 3.2,
                     ImagePath = "https://localhost:44324/Resources/Images/PS4Slim.png",
-                    ImageId = "PS4Slim.png",
                 },
 
                 new Product()
@@ -697,7 +685,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 497,
                     Weight = 4.05,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxSeriesS.png",
-                    ImageId = "XboxSeriesS.png",
                 },
                 new Product()
                 {
@@ -708,7 +695,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 580,
                     Weight = 5.8,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxSeriesX.png",
-                    ImageId = "XboxSeriesX.png",
                 },
                 new Product()
                 {
@@ -719,7 +705,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 71,
                     Weight = 3.2,
                     ImagePath = "https://localhost:44324/Resources/Images/Xbox360.png",
-                    ImageId = "Xbox360.png",
                 },
                 new Product()
                 {
@@ -730,7 +715,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 300,
                     Weight = 2.72,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxOneS.png",
-                    ImageId = "XboxOneS.png",
                 },
 
             };
@@ -1032,7 +1016,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 200,
                     Weight = 0.345,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxEliteWirelessControllerSeries2.png",
-                    ImageId = "XboxEliteWirelessControllerSeries2.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1071,7 +1054,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 75,
                     Weight = 0.345,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxWirelessController–ForzaHorizon5LimitedEdition.png",
-                    ImageId = "XboxWirelessController–ForzaHorizon5LimitedEdition.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1110,7 +1092,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 50,
                     Weight = 0.345,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxWirelessControllerBlack.png",
-                    ImageId = "XboxWirelessControllerBlack.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1149,7 +1130,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 65,
                     Weight = 0.345,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxWirelessControllerElectricVolt.png",
-                    ImageId = "XboxWirelessControllerElectricVolt.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1188,7 +1168,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 60,
                     Weight = 0.345,
                     ImagePath = "https://localhost:44324/Resources/Images/XboxWirelessControllerPulseRed.png",
-                    ImageId = "XboxWirelessControllerPulseRed.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1227,7 +1206,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4Gold.png",
-                    ImageId = "DualShock4Gold.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1266,7 +1244,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4RedCamouflage.png",
-                    ImageId = "DualShock4RedCamouflage.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1305,7 +1282,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4RoseGold.png",
-                    ImageId = "DualShock4RoseGold.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1344,7 +1320,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4SteelBlack.png",
-                    ImageId = "DualShock4SteelBlack.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1383,7 +1358,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4BerryBlue.png",
-                    ImageId = "DualShock4BerryBlue.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1422,7 +1396,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 70,
                     Weight = 0.34,
                     ImagePath = "https://localhost:44324/Resources/Images/DualShock4TLOU2.png",
-                    ImageId = "DualShock4TLOU2.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1461,7 +1434,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 97,
                     Weight = 0.43,
                     ImagePath = "https://localhost:44324/Resources/Images/PS5DualSenseController.png",
-                    ImageId = "PS5DualSenseController.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1500,7 +1472,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 749,
                     Weight = 1.11,
                     ImagePath = "https://localhost:44324/Resources/Images/MicrosoftSurfaceLaptopGo.png",
-                    ImageId = "MicrosoftSurfaceLaptopGo.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1545,7 +1516,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 999,
                     Weight = 0.77,
                     ImagePath = "https://localhost:44324/Resources/Images/MicrosoftSurfacePro.png",
-                    ImageId = "MicrosoftSurfacePro.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1590,7 +1560,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 560,
                     Weight = 0.77,
                     ImagePath = "https://localhost:44324/Resources/Images/MicrosoftSurfaceLaptop3.png",
-                    ImageId = "MicrosoftSurfaceLaptop3.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1635,7 +1604,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 899,
                     Weight = 1.6,
                     ImagePath = "https://localhost:44324/Resources/Images/MicrosoftSurfacePro6.png",
-                    ImageId = "MicrosoftSurfacePro6.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1680,7 +1648,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 340,
                     Weight = 2.67,
                     ImagePath = "https://localhost:44324/Resources/Images/SonyVAIOEL2VPCEL22FX.png",
-                    ImageId = "SonyVAIOEL2VPCEL22FX.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()
@@ -1725,7 +1692,6 @@ namespace ECommerce.Core.DataAccess
                     Price = 290,
                     Weight = 2.31,
                     ImagePath = "https://localhost:44324/Resources/Images/SonyVPCEG1BFX.png",
-                    ImageId = "SonyVPCEG1BFX.png",
                 };
 
                 var productCharacteristicsValues = new List<CharacteristicValue>()

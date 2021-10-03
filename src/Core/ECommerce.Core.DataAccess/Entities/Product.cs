@@ -14,7 +14,6 @@ namespace ECommerce.Core.DataAccess.Entities
         public decimal Price { get; set; }
         public double Weight { get; set; }
         public string ImagePath { get; set; }
-        public string ImageId { get; set; }
         public bool InStock { get; set; } = true;
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }

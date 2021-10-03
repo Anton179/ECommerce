@@ -23,8 +23,6 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
         [Required]
         public string ImagePath { get; set; }
         [Required]
-        public string ImageId { get; set; }
-        [Required]
         public Guid? CategoryId { get; set; }
         [Required]
         public virtual ICollection<CharacteristicValueDto> Characteristics { get; set; }
