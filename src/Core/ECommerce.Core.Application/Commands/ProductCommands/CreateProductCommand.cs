@@ -10,16 +10,17 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
     public class CreateProductCommand : IRequest<Guid>
     {
         [Required]
-        [StringLength(254)]
+        [StringLength(140)]
         public string Name { get; set; }
         [Required]
-        [StringLength(254)]
+        [StringLength(500)]
         public string Description { get; set; }
         [Range(1, double.MaxValue)]
         public decimal Price { get; set; }
         [Range(0.1, 5000)]
         public double Weight { get; set; }
-        public bool InStock { get; set; } = true;
+        [Required]
+        public bool? InStock { get; set; }
         [Required]
         public string ImagePath { get; set; }
         [Required]

@@ -9,10 +9,10 @@ namespace ECommerce.Core.Application.Commands.ProductCommands
     public class UpdateProductCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
-        [StringLength(254)]
+        [StringLength(140)]
         [Required]
         public string Name { get; set; }
-        [StringLength(254)]
+        [StringLength(500)]
         [Required]
         public string Description { get; set; }
         [Range(1, double.MaxValue)]
