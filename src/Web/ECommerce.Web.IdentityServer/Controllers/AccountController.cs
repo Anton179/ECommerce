@@ -1,5 +1,8 @@
-﻿using ECommerce.Core.DataAccess.Auth;
+﻿using ECommerce.Core.Application.Infrastructure.Authorization;
+using ECommerce.Core.DataAccess.Auth;
 using ECommerce.Web.IdentityServer.Attributes;
+using ECommerce.Web.IdentityServer.Infrastructure.Extensions;
+using ECommerce.Web.IdentityServer.ViewModels.Account;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -12,10 +15,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerce.Web.IdentityServer.Infrastructure.Extensions;
-using ECommerce.Web.IdentityServer.ViewModels.Account;
 
 namespace ECommerce.Web.IdentityServer.Controllers
 {
@@ -74,6 +77,11 @@ namespace ECommerce.Web.IdentityServer.Controllers
         {
             // check if we are in the context of an authorization request
             var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
+
+            if (button == "signup")
+            {
+                return RedirectToAction("signup", "Account", new { returnUrl = model.ReturnUrl });
+            }
 
             // the user clicked the "cancel" button
             if (button != "login")
@@ -161,18 +169,67 @@ namespace ECommerce.Web.IdentityServer.Controllers
             return View(vm);
         }
 
+
         /// <summary>
-        /// Show signup page
+        ///     Show signup page
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> Signup(string returnUrl)
+        public IActionResult Signup(string returnUrl)
         {
-            // build a model so we know what to show on the login page
-            var vm = await BuildLoginViewModelAsync(returnUrl);
-
-            return View(vm);
+            return View(new SignupViewModel() { ReturnUrl = returnUrl });
         }
 
+        /// <summary>
+        ///     Handle postback from signup
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> Signup(SignupViewModel model, string button)
+        {
+            if (button != "signup")
+            {
+                return RedirectToAction("login", "Account", new { returnUrl = model.ReturnUrl });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = new User
+                {
+                    UserName = model.Username,
+                    Email = model.Email,
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await CreateUserClaims(user);
+
+                    return RedirectToAction("login", "Account", new { returnUrl = model.ReturnUrl });
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
+            }
+            return View(model);
+        }
+
+        private async Task CreateUserClaims(User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim("sub", user.Id.ToString()),
+                new Claim("userName", user.UserName),
+                new Claim("email", user.Email),
+            };
+
+            await _userManager.AddClaimsAsync(user, claims);
+            await _userManager.AddToRoleAsync(user, Roles.User);
+        }
 
         /// <summary>
         /// Show logout page

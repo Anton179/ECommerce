@@ -43,7 +43,7 @@ namespace ECommerce.Web.IdentityServer
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddRoles<Role>()
                 .AddEntityFrameworkStores<ECommerceDbContext>()

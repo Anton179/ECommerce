@@ -3,7 +3,6 @@ using MediatR;
 using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,7 +36,7 @@ namespace ECommerce.Core.Application.QueryHandlers.UploadHandlers
 
                 return new { imagePath, imageId };
             }
-            
+
             throw new Exception("Internal server error");
         }
     }
