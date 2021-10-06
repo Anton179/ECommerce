@@ -503,13 +503,18 @@ namespace ECommerce.Core.DataAccess
                 };
                 var accessories = new Category()
                 {
+                    Name = "Accessories",
+                    Parent = electronics
+                };
+                var consolesAccessories = new Category()
+                {
                     Name = "Consoles accessories",
-                    Parent = consoles
+                    Parent = accessories
                 };
                 var videoGames = new Category()
                 {
                     Name = "Video Games",
-                    Parent = consoles
+                    Parent = accessories
                 };
 
                 var women = new Category()
@@ -536,7 +541,7 @@ namespace ECommerce.Core.DataAccess
                 categories.AddRange(new List<Category>()
                 {
                     musicalInstruments, clothes, fishing, autoAccessories, homeAndGarden, sports, electronics, phones, mobilePhones, homePhones,
-                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans, consoles, accessories
+                    computersTablets, hardware, videoGames, women, men, menJeans, womenJeans, consoles, accessories, consolesAccessories
                 });
             }
 
